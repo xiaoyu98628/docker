@@ -24,3 +24,36 @@ docker load -i ./etcd-amd64-v3.5.9.tar
 |       -initial-cluster-token | 启动集群的时候指定集群口令，只有相同token的几点才能加入到同一集群         |
 |             -initial-cluster | 所有集群节点的地址列表                                 |
 |       -initial-cluster-state | 初始化集群状态，默认为new，也可以指定为exi-string表示要加入到一个已有集群 |
+
+### etcd 基本使用
+```shell
+# 测试是否安装成功
+docker exec etcd-node1 etcd --version
+docker exec etcd-node1 etcdctl version
+
+
+# 增
+docker exec etcd-node1 etcdctl --endpoints=etcd-node1:2379,etcd-node2:2379,etcd-node3:2379 put abc 123
+# --endpoints 参数指定了etcd服务器的地址，这里是三个etcd容器的地址
+# 或
+docker exec etcd-node1 etcdctl put abc 123
+
+# 查
+docker exec etcd-node1 etcdctl get abc
+docker exec etcd-node2 etcdctl get abc
+docker exec etcd-node3 etcdctl get abc
+# 或
+docker exec etcd-node1 etcdctl --endpoints=etcd-node1:2379 get abc
+docker exec etcd-node1 etcdctl --endpoints=etcd-node2:2379 get abc
+docker exec etcd-node1 etcdctl --endpoints=etcd-node3:2379 get abc
+
+# 删
+docker exec etcd-node1 etcdctl del abc
+# 或
+docker exec etcd-node1 etcdctl --endpoints=etcd-node1:2379 del abc
+docker exec etcd-node1 etcdctl --endpoints=etcd-node2:2379 del abc
+docker exec etcd-node1 etcdctl --endpoints=etcd-node3:2379 del abc
+
+# 查看全部的key
+docker exec etcd-node1 etcdctl get --prefix ""
+```
