@@ -2,6 +2,7 @@ services:
   etcd-node1:
     image: gcr.io/etcd-development/etcd:v3.5.9
     container_name: etcd-node1
+    restart: always
     ports:
       - "2379:2379"
       - "2380:2380"
@@ -21,6 +22,7 @@ services:
   etcd-node2:
     image: gcr.io/etcd-development/etcd:v3.5.9
     container_name: etcd-node2
+    restart: always
     ports:
       - "12379:2379"
       - "12380:2380"
@@ -40,6 +42,7 @@ services:
   etcd-node3:
     image: gcr.io/etcd-development/etcd:v3.5.9
     container_name: etcd-node3
+    restart: always
     ports:
       - "22379:2379"
       - "22380:2380"
