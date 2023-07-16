@@ -31,6 +31,8 @@ docker load -i ./etcd-amd64-v3.5.9.tar
 docker exec etcd-node1 etcd --version
 docker exec etcd-node1 etcdctl version
 
+# 检查集群的健康状态
+docker exec etcd-node1 etcdctl endpoint health --cluster -w table
 
 # 增
 docker exec etcd-node1 etcdctl --endpoints=etcd-node1:2379,etcd-node2:2379,etcd-node3:2379 put abc 123
