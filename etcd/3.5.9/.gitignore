@@ -1,0 +1,7 @@
+*
+!.gitignore
+!compose-cluster.example.yml
+!demo.sh
+!etcd-amd64-v3.5.9.tar
+!etcd-arm64-v3.5.9.tar
+!README.md
