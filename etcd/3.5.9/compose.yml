@@ -6,16 +6,15 @@ services:
     ports:
       - "2379:2379"
       - "2380:2380"
-    command: "
-      /usr/local/bin/etcd
-      --name etcd-node1
-      --advertise-client-urls http://etcd-node1:2379
-      --initial-advertise-peer-urls http://etcd-node1:2380
-      --listen-client-urls http://0.0.0.0:2379
-      --listen-peer-urls http://0.0.0.0:2380
-      --initial-cluster-token etcd-cluster
-      --initial-cluster etcd-node1=http://etcd-node1:2380,etcd-node2=http://etcd-node2:2380,etcd-node3=http://etcd-node3:2380
-      --initial-cluster-state new"
+    environment:
+      - ETCD_NAME=etcd-node1 # 当前节点名称
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd-node1:2379 # 告知集群自己的客户端地址
+      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379 # 设置监听客户端通讯的URL列表
+      - ETCD_LISTEN_PEER_URLS=http://0.0.0.0:2380 # 用于监听伙伴通讯的URL列表
+      - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://etcd-node1:2380 # 告知集群自己集群通讯地址
+      - ETCD_INITIAL_CLUSTER=etcd-node1=http://etcd-node1:2380,etcd-node2=http://etcd-node2:2380,etcd-node3=http://etcd-node3:2380 #集群成员
+      - ETCD_INITIAL_CLUSTER_TOKEN=etcd-cluster # 集群的初始化集群记号
+      - ETCD_INITIAL_CLUSTER_STATE=new # 初始化集群状态
     networks:
       - etcd
 
@@ -26,16 +25,15 @@ services:
     ports:
       - "12379:2379"
       - "12380:2380"
-    command: "
-        /usr/local/bin/etcd
-        --name etcd-node2
-        --advertise-client-urls http://etcd-node2:2379
-        --initial-advertise-peer-urls http://etcd-node2:2380
-        --listen-client-urls http://0.0.0.0:2379
-        --listen-peer-urls http://0.0.0.0:2380
-        --initial-cluster-token etcd-cluster
-        --initial-cluster etcd-node1=http://etcd-node1:2380,etcd-node2=http://etcd-node2:2380,etcd-node3=http://etcd-node3:2380
-        --initial-cluster-state new"
+    environment:
+      - ETCD_NAME=etcd-node2 # 当前节点名称
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd-node2:2379 # 告知集群自己的客户端地址
+      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379 # 设置监听客户端通讯的URL列表
+      - ETCD_LISTEN_PEER_URLS=http://0.0.0.0:2380 # 用于监听伙伴通讯的URL列表
+      - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://etcd-node2:2380 # 告知集群自己集群通讯地址
+      - ETCD_INITIAL_CLUSTER=etcd-node1=http://etcd-node1:2380,etcd-node2=http://etcd-node2:2380,etcd-node3=http://etcd-node3:2380 #集群成员
+      - ETCD_INITIAL_CLUSTER_TOKEN=etcd-cluster # 集群的初始化集群记号
+      - ETCD_INITIAL_CLUSTER_STATE=new # 初始化集群状态
     networks:
       - etcd
 
@@ -46,16 +44,15 @@ services:
     ports:
       - "22379:2379"
       - "22380:2380"
-    command: "
-          /usr/local/bin/etcd
-          --name etcd-node3
-          --advertise-client-urls http://etcd-node3:2379
-          --initial-advertise-peer-urls http://etcd-node3:2380
-          --listen-client-urls http://0.0.0.0:2379
-          --listen-peer-urls http://0.0.0.0:2380
-          --initial-cluster-token etcd-cluster
-          --initial-cluster etcd-node1=http://etcd-node1:2380,etcd-node2=http://etcd-node2:2380,etcd-node3=http://etcd-node3:2380
-          --initial-cluster-state new"
+    environment:
+      - ETCD_NAME=etcd-node3 # 当前节点名称
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd-node3:2379 # 告知集群自己的客户端地址
+      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379 # 设置监听客户端通讯的URL列表
+      - ETCD_LISTEN_PEER_URLS=http://0.0.0.0:2380 # 用于监听伙伴通讯的URL列表
+      - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://etcd-node3:2380 # 告知集群自己集群通讯地址
+      - ETCD_INITIAL_CLUSTER=etcd-node1=http://etcd-node1:2380,etcd-node2=http://etcd-node2:2380,etcd-node3=http://etcd-node3:2380 #集群成员
+      - ETCD_INITIAL_CLUSTER_TOKEN=etcd-cluster # 集群的初始化集群记号
+      - ETCD_INITIAL_CLUSTER_STATE=new # 初始化集群状态
     networks:
       - etcd
 
