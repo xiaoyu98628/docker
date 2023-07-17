@@ -1,11 +1,3 @@
-*
-
-# 忽略文件
-!.gitignore
-# 集群所需的 yaml 文件
-!compose-cluster.example.yml
-# 镜像文件
-!etcd-amd64-v3.5.9.tar
-!etcd-arm64-v3.5.9.tar
-# 说明文件
-!README.md
+compose-cluster.yml
+compse-standalone.yml
+demo.sh

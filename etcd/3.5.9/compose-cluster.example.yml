@@ -16,7 +16,7 @@ services:
       - ETCD_INITIAL_CLUSTER_TOKEN=etcd-cluster # 集群的初始化集群记号
       - ETCD_INITIAL_CLUSTER_STATE=new # 初始化集群状态
     networks:
-      - etcd
+      - etcd-cluster
 
   etcd-node2:
     image: gcr.io/etcd-development/etcd:v3.5.9
@@ -35,7 +35,7 @@ services:
       - ETCD_INITIAL_CLUSTER_TOKEN=etcd-cluster # 集群的初始化集群记号
       - ETCD_INITIAL_CLUSTER_STATE=new # 初始化集群状态
     networks:
-      - etcd
+      - etcd-cluster
 
   etcd-node3:
     image: gcr.io/etcd-development/etcd:v3.5.9
@@ -54,7 +54,7 @@ services:
       - ETCD_INITIAL_CLUSTER_TOKEN=etcd-cluster # 集群的初始化集群记号
       - ETCD_INITIAL_CLUSTER_STATE=new # 初始化集群状态
     networks:
-      - etcd
+      - etcd-cluster
 
 networks:
-  etcd:
+  etcd-cluster:
