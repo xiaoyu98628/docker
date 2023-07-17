@@ -1,13 +1,14 @@
 # docker 部署 etcd 3.5.9 集群  
 
 #### 文件说明
+
 ```gitignore
 # 忽略文件
 !.gitignore
 # 集群所需的 yaml 文件
 !compose-cluster.example.yml
 # 单机所需的 yaml 文件
-!compse-standalone.example.yml
+!compose-standalone.example.yml
 # 镜像文件
 !etcd-amd64-v3.5.9.tar
 !etcd-arm64-v3.5.9.tar
