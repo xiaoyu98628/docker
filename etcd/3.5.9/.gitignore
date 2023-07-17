@@ -1,9 +1,11 @@
 *
-!.gitignore
 
-# 该文件夹下必须文件
+# 忽略文件
+!.gitignore
+# 集群所需的 yaml 文件
 !compose-cluster.example.yml
-!demo.sh
+# 镜像文件
 !etcd-amd64-v3.5.9.tar
 !etcd-arm64-v3.5.9.tar
+# 说明文件
 !README.md
