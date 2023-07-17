@@ -14,6 +14,8 @@ docker load -i ./etcd-amd64-v3.5.9.tar
 ```
 
 #### etcd 参数详解  
+1. 方式一
+
 |                          参数名 | 说明                                          |
 |-----------------------------:|:--------------------------------------------|
 |                        -name | 设置成员节点的别名，建议为每个成员节点配置可识别的命名                 |
@@ -24,6 +26,20 @@ docker load -i ./etcd-amd64-v3.5.9.tar
 |       -initial-cluster-token | 启动集群的时候指定集群口令，只有相同token的几点才能加入到同一集群         |
 |             -initial-cluster | 所有集群节点的地址列表                                 |
 |       -initial-cluster-state | 初始化集群状态，默认为new，也可以指定为exi-string表示要加入到一个已有集群 |
+
+
+2. 方式二
+
+|                              参数名 | 说明              |
+|---------------------------------:|:----------------|
+|                        ETCD_NAME | 当前节点名称          |
+|       ETCD_ADVERTISE_CLIENT_URLS | 告知集群自己的客户端地址    |
+|          ETCD_LISTEN_CLIENT_URLS | 设置监听客户端通讯的URL列表 |
+| ETCD_INITIAL_ADVERTISE_PEER_URLS | 告知集群自己集群通讯地址    |
+|            ETCD_LISTEN_PEER_URLS | 用于监听伙伴通讯的URL列表  |
+|       ETCD_INITIAL_CLUSTER_TOKEN | 集群的初始化集群记号      |
+|             ETCD_INITIAL_CLUSTER | 集群成员            |
+|       ETCD_INITIAL_CLUSTER_STATE | 初始化集群状态         |
 
 ### etcd 基本使用
 ```shell
