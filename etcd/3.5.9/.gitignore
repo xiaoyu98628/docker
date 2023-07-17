@@ -1,5 +1,7 @@
 *
 !.gitignore
+
+# 该文件夹下必须文件
 !compose-cluster.example.yml
 !demo.sh
 !etcd-amd64-v3.5.9.tar
