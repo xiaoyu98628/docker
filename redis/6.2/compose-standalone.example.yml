@@ -9,7 +9,7 @@ services:
     volumes:
       - "./standalone/conf:/etc/redis"     # 配置文件
       - "./standalone/data:/data"          # 数据文件
-      - "./standalone/log:/var/log/redis"  # 日志文件
+      - "./standalone/logs:/var/log/redis"  # 日志文件
     environment:
       - "TZ=${TZ}"
     entrypoint: ["redis-server", "/etc/redis/docker.conf", "--requirepass", "${PASSWORD}"]
