@@ -56,34 +56,34 @@ docker load -i ./etcd-amd64-v3.5.9.tar
 ### etcd 基本使用
 ```shell
 # 测试是否安装成功
-docker exec etcd-node1 etcd --version
-docker exec etcd-node1 etcdctl version
+docker exec etcd-node-1 etcd --version
+docker exec etcd-node-1 etcdctl version
 
 # 检查集群的健康状态
-docker exec etcd-node1 etcdctl endpoint health --cluster -w table
+docker exec etcd-node-1 etcdctl endpoint health --cluster -w table
 
 # 增
-docker exec etcd-node1 etcdctl --endpoints=etcd-node1:2379,etcd-node2:2379,etcd-node3:2379 put abc 123
+docker exec etcd-node-1 etcdctl --endpoints=etcd-node-1:2379,etcd-node-2:2379,etcd-node-3:2379 put abc 123
 # --endpoints 参数指定了etcd服务器的地址，这里是三个etcd容器的地址
 # 或
-docker exec etcd-node1 etcdctl put abc 123
+docker exec etcd-node-1 etcdctl put abc 123
 
 # 查
-docker exec etcd-node1 etcdctl get abc
-docker exec etcd-node2 etcdctl get abc
-docker exec etcd-node3 etcdctl get abc
+docker exec etcd-node-1 etcdctl get abc
+docker exec etcd-node-2 etcdctl get abc
+docker exec etcd-node-3 etcdctl get abc
 # 或
-docker exec etcd-node1 etcdctl --endpoints=etcd-node1:2379 get abc
-docker exec etcd-node1 etcdctl --endpoints=etcd-node2:2379 get abc
-docker exec etcd-node1 etcdctl --endpoints=etcd-node3:2379 get abc
+docker exec etcd-node-1 etcdctl --endpoints=etcd-node-1:2379 get abc
+docker exec etcd-node-1 etcdctl --endpoints=etcd-node-2:2379 get abc
+docker exec etcd-node-1 etcdctl --endpoints=etcd-node-3:2379 get abc
 
 # 删
-docker exec etcd-node1 etcdctl del abc
+docker exec etcd-node-1 etcdctl del abc
 # 或
-docker exec etcd-node1 etcdctl --endpoints=etcd-node1:2379 del abc
-docker exec etcd-node1 etcdctl --endpoints=etcd-node2:2379 del abc
-docker exec etcd-node1 etcdctl --endpoints=etcd-node3:2379 del abc
+docker exec etcd-node-1 etcdctl --endpoints=etcd-node-1:2379 del abc
+docker exec etcd-node-1 etcdctl --endpoints=etcd-node-2:2379 del abc
+docker exec etcd-node-1 etcdctl --endpoints=etcd-node-3:2379 del abc
 
 # 查看全部的key
-docker exec etcd-node1 etcdctl get --prefix ""
+docker exec etcd-node-1 etcdctl get --prefix ""
 ```
