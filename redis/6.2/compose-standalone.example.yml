@@ -12,8 +12,7 @@ services:
       - "./standalone/log:/var/log/redis"  # 日志文件
     environment:
       - "TZ=${TZ}"
-      - "REDIS_PASSWORD=${PASSWORD}"
-    entrypoint: ["redis-server", "/etc/redis/docker.conf"]
+    entrypoint: ["redis-server", "/etc/redis/docker.conf", "--requirepass", "${PASSWORD}"]
     networks:
       - redis-standalone
 
