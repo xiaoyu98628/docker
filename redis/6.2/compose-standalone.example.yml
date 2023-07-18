@@ -11,10 +11,8 @@ services:
       - "./standalone/data:/data"          # 数据文件
       - "./standalone/log:/var/log/redis"  # 日志文件
     environment:
-      - "TZ=Asia/Shanghai"
-    entrypoint: ["redis-server", "/etc/redis/docker.conf"]
-    command:
-      - "redis-server --requirepass 123456"
+      - "TZ=${TZ}"
+    entrypoint: ["redis-server", "/etc/redis/docker.conf", "--requirepass", "${PASSWORD}"]
     networks:
       - redis-standalone
 
