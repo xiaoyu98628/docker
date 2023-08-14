@@ -6,9 +6,9 @@
 # 忽略文件
 !.gitignore
 # 集群所需的 yaml 文件
-!compose-cluster.example.yml
+!compose-cluster.sample.yml
 # 单机所需的 yaml 文件
-!compose-standalone.example.yml
+!compose-standalone.sample.yml
 # 镜像文件
 !etcd-amd64-v3.5.9.tar
 !etcd-arm64-v3.5.9.tar
