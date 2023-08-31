@@ -1,0 +1,19 @@
+services:
+  jenkins2.414:
+    image: jenkins/jenkins:2.414.1-lts-alpine
+    container_name: jenkins2.414
+    restart: always
+    privileged: true
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - "./standalone/jenkins_home:/var/jenkins_home" # jenkins 家目录
+      - "./standalone/www:/var/jenkins_home/workspace" # 项目存储位置
+    environment:
+      - "TZ=${TZ}"
+    networks:
+      - jenkins-standalone
+
+networks:
+  jenkins-standalone:
