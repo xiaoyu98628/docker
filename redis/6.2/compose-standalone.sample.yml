@@ -14,7 +14,4 @@ services:
       - "TZ=${TZ}"
     entrypoint: ["redis-server", "/etc/redis/docker.conf", "--requirepass", "${PASSWORD}"]
     networks:
-      - redis-standalone
-
-networks:
-  redis-standalone:
+      - docker

@@ -1,0 +1,9 @@
+include :
+  - etcd/3.5.9/compose-standalone.yml
+  - jenkins/2.414/compose-standalone.yml
+  - redis/6.2/compose-standalone.yml
+
+networks:
+  docker:
+    name: docker
+    driver: bridge

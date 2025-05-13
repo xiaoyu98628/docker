@@ -13,7 +13,4 @@ services:
     environment:
       - "TZ=${TZ}"
     networks:
-      - jenkins-standalone
-
-networks:
-  jenkins-standalone:
+      - docker

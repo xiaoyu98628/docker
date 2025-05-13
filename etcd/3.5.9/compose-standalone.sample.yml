@@ -17,7 +17,4 @@ services:
       - ETCD_INITIAL_CLUSTER_TOKEN=etcd-standalone # 集群的初始化集群记号
       - ETCD_INITIAL_CLUSTER_STATE=new # 初始化集群状态
     networks:
-      - etcd-standalone
-
-networks:
-  etcd-standalone:
+      - docker
