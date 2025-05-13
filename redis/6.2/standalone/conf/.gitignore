@@ -1,0 +1,11 @@
+# 忽略当前文件夹下所有文件上传 git
+*
+
+# 排除 .gitignore 文件
+!.gitignore
+
+# 排除 docker.conf 文件
+!docker.conf
+
+# 排除 redis.conf 文件
+!redis.conf

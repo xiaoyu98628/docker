@@ -1,2 +1,21 @@
-compose-cluster.yml
-compose-standalone.yml
+# 忽略当前文件夹下所有文件上传 git
+*
+
+# 排除 .gitignore 文件
+!.gitignore
+
+# 排除 compose-cluster.sample.yml 文件
+!compose-cluster.sample.yml
+
+# 排除 compose-standalone.sample.yml 文件
+!compose-standalone.sample.yml
+
+# 排除 demo.sh 文件
+!demo.sh
+
+# 排除  etcd-amd64-v3.5.9.tar 和 etcd-arm64-v3.5.9.tar 文件
+!etcd-amd64-v3.5.9.tar
+!etcd-arm64-v3.5.9.tar
+
+# 排除 README.md 文件
+!README.md

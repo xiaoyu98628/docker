@@ -4,22 +4,22 @@
 # 忽略 MacOS 系统特有文件
 .DS_Store
 
-# 排除 etcd
+# 排除 etcd 文件
 !etcd
 !etcd/**
 
-# 排除 jenkins
+# 排除 jenkins 文件
 !jenkins
 !jenkins/**
 
-# 排除 redis
+# 排除 redis 文件
 !redis
 !redis/**
 
 # 排除 .gitignore 文件
 !.gitignore
 
-# 排除 compose.sample.yml
+# 排除 compose.sample.yml 文件
 !compose.sample.yml
 
 # 排除 LICENSE 文件
