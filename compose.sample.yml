@@ -3,6 +3,20 @@ include :
   - jenkins/2.414/compose-standalone.yml
   - redis/6.2/compose-standalone.yml
 
+volumes:
+  config_directory: # 定义命名卷（配置文件）
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ./config # 宿主机绝对路径
+  project_directory: # 定义命名卷（项目路径）
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ./www # 宿主机绝对路径
+
 networks:
   docker:
     name: docker
