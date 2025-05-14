@@ -4,6 +4,10 @@
 # 忽略 MacOS 系统特有文件
 .DS_Store
 
+# 排除 config 文件
+!config
+!config/**
+
 # 排除 etcd 文件
 !etcd
 !etcd/**
@@ -12,9 +16,17 @@
 !jenkins
 !jenkins/**
 
+# 排除 php 文件
+!php
+!php/**
+
 # 排除 redis 文件
 !redis
 !redis/**
+
+# 排除 www 文件
+!www
+!www/**
 
 # 排除 .gitignore 文件
 !.gitignore
