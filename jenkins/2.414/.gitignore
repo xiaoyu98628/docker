@@ -4,12 +4,16 @@
 # 排除 .gitignore 文件
 !.gitignore
 
-# 排除 standalone 文件
-!standalone
-!standalone/**
+# 排除 jenkins_home 文件
+!jenkins_home
+!jenkins_home/**
 
-# 排除 compose-standalone.sample.yml 文件
-!compose-standalone.sample.yml
+# 排除 www 文件
+!www
+!www/**
+
+# 排除 compose.sample.yml 文件
+!compose.sample.yml
 
 # 排除 sample.env 文件
 !sample.env

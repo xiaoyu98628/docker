@@ -8,8 +8,8 @@ services:
       - "8080:8080"
       - "50000:50000"
     volumes:
-      - "./standalone/jenkins_home:/var/jenkins_home" # jenkins 家目录
-      - "./standalone/www:/var/jenkins_home/workspace" # 项目存储位置
+      - "./jenkins_home:/var/jenkins_home" # jenkins 家目录
+      - "./www:/var/jenkins_home/workspace" # 项目存储位置
     environment:
       - "TZ=${TZ}"
     networks:
