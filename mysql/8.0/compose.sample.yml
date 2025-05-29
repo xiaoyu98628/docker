@@ -1,0 +1,20 @@
+services:
+  mysql8.0:
+    image: mysql:8.0
+    container_name: mysql80
+    restart: always
+    privileged: true
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./config:/etc/mysql"     # 配置文件
+      - "./data:/var/lib/mysql"   # 数据库文件
+      - "./logs:/var/log/mysql"   # 日志文件
+    environment:
+      - "TZ=${TZ}"
+      - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
+      - "MYSQL_ROOT_HOST=${MYSQL_ROOT_HOST}"
+      - "MYSQL_USER=${MYSQL_USER}"
+      - "MYSQL_PASSWORD=${MYSQL_PASSWORD}"
+    networks:
+      - docker

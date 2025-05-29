@@ -16,6 +16,10 @@
 !jenkins
 !jenkins/**
 
+# 排除 mysql 文件
+!mysql
+!mysql/**
+
 # 排除 php 文件
 !php
 !php/**
