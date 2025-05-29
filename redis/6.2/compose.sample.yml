@@ -1,0 +1,17 @@
+services:
+  redis6.2:
+    image: redis:6.2-alpine
+    container_name: redis62
+    restart: always
+    privileged: true
+    ports:
+      - "6379:6379"
+    volumes:
+      - "./config:/etc/redis"     # 配置文件
+      - "./data:/data"            # 数据文件
+      - "./logs:/var/log/redis"   # 日志文件
+    environment:
+      - "TZ=${TZ}"
+    entrypoint: ["redis-server", "/etc/redis/docker.conf", "--requirepass", "${PASSWORD}"]
+    networks:
+      - docker

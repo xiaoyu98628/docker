@@ -4,12 +4,20 @@
 # 排除 .gitignore 文件
 !.gitignore
 
-# 排除 standalone 文件
-!standalone
-!standalone/**
+# 排除 config 文件
+!config
+!config/**
 
-# 排除 compose-standalone.sample.yml 文件
-!compose-standalone.sample.yml
+# 排除 data 文件
+!data
+!data/**
+
+# 排除 logs 文件
+!logs
+!logs/**
+
+# 排除 compose.sample.yml 文件
+!compose.sample.yml
 
 # 排除 sample.env 文件
 !sample.env
