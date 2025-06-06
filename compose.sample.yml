@@ -1,7 +1,7 @@
 include :
-  - etcd/3.5.9/compose-standalone.yml
-  - jenkins/2.414/compose-standalone.yml
-  - redis/6.2/compose-standalone.yml
+  - php/8.2/compose.yml
+  - mysql/8.0/compose.yml
+  - redis/6.2/compose.yml
 
 volumes:
   config_directory: # 定义命名卷（配置文件）
