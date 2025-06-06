@@ -43,3 +43,6 @@
 
 # 排除 README.md 文件
 !README.md
+
+# 排除 sample.env 文件
+!sample.env
