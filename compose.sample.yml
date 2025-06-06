@@ -15,7 +15,7 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: ./www # 宿主机路径
+      device: ${PROJECT_DIRECTORY} # 宿主机路径
 
 networks:
   docker:
