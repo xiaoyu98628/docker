@@ -16,7 +16,7 @@ services:
       - "./config/php-fpm.conf:/usr/local/etc/php-fpm.conf:rw"             # php-fpm.conf
       - "./config/php-fpm.d:/usr/local/etc/php-fpm.d"                      # php-fpm.d
       - "./config/supervisor/supervisord.conf:/etc/supervisord.conf:ro"    # supervisor配置文件
-      - "./config/supervisor/supervisord.d:/etc/supervisord.d:rw"          # supervisor自服务配置文件
+      - "./config/supervisor/supervisor.d:/etc/supervisor.d:rw"            # supervisor自服务配置文件
       - "./logs:/var/log/php"                                              # 日志文件
       - "config_directory:/usr/config"                                     # nginx使用unix连接文件
       - "project_directory:/var/www/html"                                  # 站点文件路径
