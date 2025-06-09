@@ -20,6 +20,10 @@
 !mysql
 !mysql/**
 
+# 排除 nginx 文件
+!nginx
+!nginx/**
+
 # 排除 php 文件
 !php
 !php/**

@@ -4,10 +4,6 @@
 # 排除 .gitignore 文件
 !.gitignore
 
-# 排除 nginx 文件
-!nginx
-!nginx/**
-
-# 排除 php 文件
-!php
-!php/**
+# 排除 1.21 文件
+!1.21
+!1.21/**

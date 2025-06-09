@@ -4,10 +4,10 @@
 # 排除 .gitignore 文件
 !.gitignore
 
-# 排除 nginx 文件
-!nginx
-!nginx/**
+# 排除 ssl 文件
+!ssl
+!ssl/**
 
-# 排除 php 文件
-!php
-!php/**
+# 排除 vhost 文件
+!vhost
+!vhost/**
