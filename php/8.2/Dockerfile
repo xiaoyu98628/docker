@@ -1,7 +1,10 @@
 # 指定基于 php:8.2-fpm-alpine 创建
 FROM php:8.2-fpm-alpine
 
-LABEL org.opencontainers.image.authors="XiaoYu <1765841705@qq.com>"
+# 维护者信息
+LABEL maintainer="XiaoYu <1765841705@qq.com>" \
+    version="8.2" \
+    description="PHP 8.2 FPM with common extensions based on Alpine Linux"
 
 ARG CONTAINER_PACKAGE_URL
 ARG PHP_EXTENSIONS
