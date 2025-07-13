@@ -6,3 +6,6 @@
 
 # 排除 install-php-extensions 文件
 !install-php-extensions
+
+# 排除 docker-entrypoint 文件
+!docker-entrypoint
