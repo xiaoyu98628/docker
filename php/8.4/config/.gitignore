@@ -1,0 +1,23 @@
+# 忽略当前文件夹下所有文件上传 git
+*
+
+# 排除 .gitignore 文件
+!.gitignore
+
+# 排除 extensions 文件
+!extensions
+!extensions/**
+
+# 排除 php-fpm.d 文件
+!php-fpm.d
+!php-fpm.d/**
+
+# 排除 supervisor 文件
+!supervisor
+!supervisor/**
+
+# 排除 php.ini 文件
+!php.ini
+
+# 排除 php-fpm.conf 文件
+!php-fpm.conf
