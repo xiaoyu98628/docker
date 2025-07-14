@@ -4,10 +4,6 @@
 # 排除 .gitignore 文件
 !.gitignore
 
-# 排除 8.2 文件
-!8.2
-!8.2/**
-
-# 排除 8.3 文件
-!8.3
-!8.3/**
+# 排除 supervisor 文件
+!supervisor
+!supervisor/**
