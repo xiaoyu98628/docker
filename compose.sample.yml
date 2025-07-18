@@ -1,7 +1,9 @@
 include :
   - php/8.2/compose.yml
+  - php/8.3/compose.yml
+  - php/8.4/compose.yml
   - mysql/8.0/compose.yml
-  - redis/6.2/compose.yml
+  - redis/6/compose.yml
 
 volumes:
   config_directory: # 定义命名卷（配置文件）

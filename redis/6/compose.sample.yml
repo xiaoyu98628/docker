@@ -1,7 +1,7 @@
 services:
-  redis6.2:
-    image: redis:6.2-alpine
-    container_name: redis62
+  redis6:
+    image: redis:6-alpine
+    container_name: redis6
     restart: always
     privileged: true
     ports:
