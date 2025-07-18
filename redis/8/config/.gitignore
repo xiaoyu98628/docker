@@ -4,14 +4,8 @@
 # 排除 .gitignore 文件
 !.gitignore
 
-# 排除 6 文件
-!6
-!6/**
+# 排除 docker.conf 文件
+!docker.conf
 
-# 排除 7 文件
-!7
-!7/**
-
-# 排除 8 文件
-!8
-!8/**
+# 排除 redis.conf 文件
+!redis.conf
