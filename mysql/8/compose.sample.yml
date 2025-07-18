@@ -1,7 +1,7 @@
 services:
-  mysql8.0:
-    image: mysql:8.0
-    container_name: mysql80
+  mysql8:
+    image: mysql:8
+    container_name: mysql8
     restart: always
     privileged: true
     ports:
