@@ -12,6 +12,10 @@
 !data
 !data/**
 
+# 排除 init 文件
+!init
+!init/**
+
 # 排除 logs 文件
 !logs
 !logs/**
