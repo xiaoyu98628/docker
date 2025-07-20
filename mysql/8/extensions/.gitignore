@@ -4,5 +4,5 @@
 # 排除 .gitignore 文件
 !.gitignore
 
-# 排除 init.sql.template 文件
-!init.sql.template
+# 排除 entrypoint.sh 文件
+!entrypoint.sh

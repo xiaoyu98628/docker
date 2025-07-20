@@ -12,6 +12,10 @@
 !data
 !data/**
 
+# 排除 extensions 文件
+!extensions
+!extensions/**
+
 # 排除 init 文件
 !init
 !init/**
