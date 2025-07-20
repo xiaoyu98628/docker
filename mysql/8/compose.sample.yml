@@ -1,6 +1,10 @@
 services:
   mysql8:
-    image: mysql:8
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        TZ: ${TZ}
     container_name: mysql8
     restart: always
     privileged: true
@@ -12,11 +16,9 @@ services:
       - "./logs:/var/log/mysql"   # 日志文件
       - "./init:/docker-entrypoint-initdb.d" # 初始化自定义数据库、用户和权限
     environment:
-      - "TZ=${TZ}"
       - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
       - "MYSQL_ROOT_HOST=${MYSQL_ROOT_HOST}"
       - "MYSQL_USER=${MYSQL_USER}"
       - "MYSQL_PASSWORD=${MYSQL_PASSWORD}"
-    command: /bin/sh -c "/docker-entrypoint-initdb.d/entrypoint.sh && docker-entrypoint.sh mysqld"
     networks:
       - docker
