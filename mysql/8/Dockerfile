@@ -6,6 +6,7 @@ LABEL maintainer="XiaoYu <1765841705@qq.com>" \
     version="8"
 
 ARG TZ
+ARG MYSQL_USER
 
 # 修改时间
 RUN if [ ${TZ} ]; then ln -sf "/usr/share/zoneinfo/${TZ}" /etc/localtime && echo "${TZ}" > /etc/timezone; fi

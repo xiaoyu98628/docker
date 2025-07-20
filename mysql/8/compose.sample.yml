@@ -5,6 +5,7 @@ services:
       dockerfile: Dockerfile
       args:
         TZ: ${TZ}
+        MYSQL_USER: ${MYSQL_USER}
     container_name: mysql8
     restart: always
     privileged: true
