@@ -17,5 +17,6 @@ services:
       - "MYSQL_ROOT_HOST=${MYSQL_ROOT_HOST}"
       - "MYSQL_USER=${MYSQL_USER}"
       - "MYSQL_PASSWORD=${MYSQL_PASSWORD}"
+    command: /bin/sh -c "/docker-entrypoint-initdb.d/entrypoint.sh && docker-entrypoint.sh mysqld"
     networks:
       - docker
