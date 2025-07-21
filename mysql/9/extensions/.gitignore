@@ -4,10 +4,5 @@
 # 排除 .gitignore 文件
 !.gitignore
 
-# 排除 8 文件
-!8
-!8/**
-
-# 排除 9 文件
-!9
-!9/**
+# 排除 entrypoint.sh 文件
+!entrypoint.sh

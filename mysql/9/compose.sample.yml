@@ -1,0 +1,26 @@
+services:
+  mysql9:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        TZ: ${TZ}
+        MYSQL_USER: ${MYSQL_USER}
+    container_name: mysql9
+    restart: always
+    privileged: true
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./config/my.cnf:/etc/my.cnf:ro"           # 配置文件
+      - "./config/conf.d:/etc/mysql/conf.d:ro"     # 配置文件
+      - "./init:/docker-entrypoint-initdb.d"       # 初始化自定义数据库、用户和权限
+      - "./data:/var/lib/mysql"                    # 数据库文件
+      - "./logs:/var/log/mysql"                    # 日志文件
+    environment:
+      - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
+      - "MYSQL_ROOT_HOST=${MYSQL_ROOT_HOST}"
+      - "MYSQL_USER=${MYSQL_USER}"
+      - "MYSQL_PASSWORD=${MYSQL_PASSWORD}"
+    networks:
+      - docker

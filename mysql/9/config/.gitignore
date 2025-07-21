@@ -4,10 +4,9 @@
 # 排除 .gitignore 文件
 !.gitignore
 
-# 排除 8 文件
-!8
-!8/**
+# 排除 conf.d 文件
+!conf.d
+!conf.d/**
 
-# 排除 9 文件
-!9
-!9/**
+# 排除 my.cnf 文件
+!my.cnf
