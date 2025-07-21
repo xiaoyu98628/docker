@@ -1,0 +1,38 @@
+# 忽略当前文件夹下所有文件上传 git
+*
+
+# 排除 .gitignore 文件
+!.gitignore
+
+# 排除 acme.sh 文件
+!acme.sh
+!acme.sh/**
+
+# 排除 extensions 文件
+!extensions
+!extensions/**
+
+# 排除 php 文件
+!php
+!php/**
+
+# 排除 fastcgi.conf 文件
+!fastcgi.conf
+
+# 排除 fastcgi_params 文件
+!fastcgi_params
+
+# 排除 mime.types 文件
+!mime.types
+
+# 排除 nginx.conf 文件
+!nginx.conf
+
+# 排除 pathinfo.conf 文件
+!pathinfo.conf
+
+# 排除 scgi_params 文件
+!scgi_params
+
+# 排除 uwsgi_params 文件
+!uwsgi_params
