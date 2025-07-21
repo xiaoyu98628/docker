@@ -6,7 +6,6 @@ services:
       args:
         TZ: ${TZ}
         MYSQL_USER: ${MYSQL_USER}
-        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
     container_name: mysql8
     restart: always
     privileged: true
