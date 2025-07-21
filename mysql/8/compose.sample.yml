@@ -12,10 +12,11 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - "./config:/etc/mysql"     # 配置文件
-      - "./data:/var/lib/mysql"   # 数据库文件
-      - "./logs:/var/log/mysql"   # 日志文件
-      - "./init:/docker-entrypoint-initdb.d" # 初始化自定义数据库、用户和权限
+      - "./config/my.cnf:/etc/my.cnf:ro"           # 配置文件
+      - "./config/conf.d:/etc/mysql/conf.d:ro"     # 配置文件
+      - "./init:/docker-entrypoint-initdb.d"       # 初始化自定义数据库、用户和权限
+      - "./data:/var/lib/mysql"                    # 数据库文件
+      - "./logs:/var/log/mysql"                    # 日志文件
     environment:
       - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
       - "MYSQL_ROOT_HOST=${MYSQL_ROOT_HOST}"

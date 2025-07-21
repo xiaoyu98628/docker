@@ -10,9 +10,3 @@
 
 # 排除 my.cnf 文件
 !my.cnf
-
-# 排除 my.cnf.fallback 文件
-!my.cnf.fallback
-
-# 排除 my.cnf-bak 文件
-!my.cnf-bak
