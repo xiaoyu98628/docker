@@ -4,10 +4,5 @@
 # 排除 .gitignore 文件
 !.gitignore
 
-# 排除 1.21 文件
-!1.21
-!1.21/**
-
-# 排除 1.28 文件
-!1.28
-!1.28/**
+# 排除 localhost.conf.sample 文件
+!localhost.conf.sample
