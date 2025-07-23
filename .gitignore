@@ -20,6 +20,10 @@
 !jenkins
 !jenkins/**
 
+# 排除 kibana 文件
+!kibana
+!kibana/**
+
 # 排除 mysql 文件
 !mysql
 !mysql/**
