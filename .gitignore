@@ -8,6 +8,10 @@
 !config
 !config/**
 
+# 排除 elasticsearch 文件
+!elasticsearch
+!elasticsearch/**
+
 # 排除 etcd 文件
 !etcd
 !etcd/**
