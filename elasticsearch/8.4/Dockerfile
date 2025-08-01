@@ -134,7 +134,7 @@ RUN if [ -z "${PLUGINS##*,amazon-ec2,*}" ]; \
     && if [ -z "${PLUGINS##*,analysis-ik,*}" ]; \
     then \
         echo "---------- Install analysis-ik ----------" \
-        && printf "y\n" | elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v8.4.0/elasticsearch-analysis-ik-8.4.0.zip; \
+        && printf "y\n" | elasticsearch-plugin install https://get.infini.cloud/elasticsearch/analysis-ik/8.4.0; \
     fi \
     && if [ -z "${PLUGINS##*,analysis-pinyin,*}" ]; \
     then \
