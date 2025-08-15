@@ -1,0 +1,39 @@
+# 忽略当前文件夹下所有文件上传 git
+*
+
+# 排除 .gitignore 文件
+!.gitignore
+
+# 排除 certs 文件
+!certs
+!certs/**
+
+# 排除 elasticsearch.keystore 文件
+!elasticsearch.keystore
+
+# 排除 elasticsearch.yml 文件
+!elasticsearch.yml
+
+# 排除 elasticsearch-plugins.example.yml 文件
+!elasticsearch-plugins.example.yml
+
+# 排除 jvm.options 文件
+!jvm.options
+
+# 排除 log4j2.file.properties 文件
+!log4j2.file.properties
+
+# 排除 log4j2.properties 文件
+!log4j2.properties
+
+# 排除 role_mapping.yml 文件
+!role_mapping.yml
+
+# 排除 roles.yml 文件
+!roles.yml
+
+# 排除 users 文件
+!users
+
+# 排除 users_roles 文件
+!users_roles
