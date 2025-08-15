@@ -1,0 +1,27 @@
+services:
+  rabbitmq3.11:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
+        RABBITMQ_PLUGINS: ${RABBITMQ_PLUGINS}
+        TZ: ${TZ}
+    container_name: rabbitmq3.11
+    hostname: rabbitmq3.11          # RabbitMQ的一个重要注意事项是它根据所谓的 “节点名称” 存储数据，默认为主机名
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - "./config/conf.d:/etc/rabbitmq/conf.d:ro"       # 配置文件
+      - "./data:/var/lib/rabbitmq/mnesia:rw"            # 数据文件
+      - "./logs:/var/log/rabbitmq:rw"                   # 日志文件
+    environment:
+      - "RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}"
+      - "RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}"
+      - "RABBITMQ_NODENAME=rabbit@rabbitmq3.11"
+      - "RABBITMQ_USE_LONGNAME=true"                                          # 设置短名称
+      - "RABBITMQ_ERLANG_COOKIE=secret-cookie"                                # 确保使用一致的 Erlang cookie
+    networks:
+      - docker

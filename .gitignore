@@ -36,6 +36,10 @@
 !php
 !php/**
 
+# 排除 rabbitmq 文件
+!rabbitmq
+!rabbitmq/**
+
 # 排除 redis 文件
 !redis
 !redis/**
