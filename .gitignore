@@ -24,6 +24,10 @@
 !kibana
 !kibana/**
 
+# 排除 mongo 文件
+!mongo
+!mongo/**
+
 # 排除 mysql 文件
 !mysql
 !mysql/**

@@ -1,0 +1,13 @@
+# 忽略当前文件夹下所有文件上传 git
+*
+
+# 排除 .gitignore 文件
+!.gitignore
+
+# 排除 6.0 文件
+!6.0
+!6.0/**
+
+# 排除 express 文件
+!express
+!express/**

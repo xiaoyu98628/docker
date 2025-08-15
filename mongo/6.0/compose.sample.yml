@@ -1,0 +1,18 @@
+services:
+  mongo6.0:
+    image: mongo:6.0
+    container_name: mongodb60
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - "./config/mongo.conf:/etc/mongo.conf:ro"    # 配置文件
+      - "./data:/var/lib/mongodb:rw"                # 数据库文件
+      - "./logs:/var/log/mongodb:rw"                # 日志文件
+    environment:
+      - "TZ=${TZ}"
+      - "MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}"
+      - "MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}"
+    command: "mongod --config /etc/mongo.conf"
+    networks:
+      - docker
