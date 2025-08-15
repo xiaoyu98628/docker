@@ -1,7 +1,7 @@
 services:
-  elasticsearch8.4:
+  elasticsearch8.4.0:
     image: elasticsearch:8.4.0
-    container_name: elasticsearch8.4
+    container_name: elasticsearch8.4.0
     restart: always
     privileged: true
     ports:

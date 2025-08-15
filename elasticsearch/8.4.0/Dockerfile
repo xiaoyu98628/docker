@@ -5,6 +5,9 @@ ARG ELASTICSEARCH_PLUGINS
 
 ENV PLUGINS=",${ELASTICSEARCH_PLUGINS},"
 
+# 修改时间
+RUN if [ ${TZ} ]; then ln -sf "/usr/share/zoneinfo/${TZ}" /etc/localtime && echo "${TZ}" > /etc/timezone; fi
+
 # 安装插件
 RUN if [ -z "${PLUGINS##*,amazon-ec2,*}" ]; \
     then \
