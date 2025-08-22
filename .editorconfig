@@ -1,0 +1,15 @@
+root = true
+
+[*]
+charset = utf-8     # 文件编码设为 UTF-8
+end_of_line = lf    # 换行符使用 LF（Unix 风格，避免 CRLF）
+indent_size = 4                  # 缩进宽度是 4 个字符
+indent_style = space             # 缩进使用空格而不是 Tab
+insert_final_newline = true      # 文件末尾强制保留一个换行
+trim_trailing_whitespace = true  # 自动去掉行尾多余的空格
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.{yml,yaml}]
+indent_size = 2

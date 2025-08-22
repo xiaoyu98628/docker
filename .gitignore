@@ -55,6 +55,9 @@
 # 排除 .gitignore 文件
 !.gitignore
 
+# 排除 .editorconfig 文件
+!.editorconfig
+
 # 排除 compose.sample.yml 文件
 !compose.sample.yml
 
