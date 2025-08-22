@@ -1,15 +1,43 @@
+# 这是 EditorConfig 配置文件，用于统一代码风格
 root = true
 
+# 默认规则：应用于所有文件
 [*]
-charset = utf-8     # 文件编码设为 UTF-8
-end_of_line = lf    # 换行符使用 LF（Unix 风格，避免 CRLF）
-indent_size = 4                  # 缩进宽度是 4 个字符
-indent_style = space             # 缩进使用空格而不是 Tab
-insert_final_newline = true      # 文件末尾强制保留一个换行
-trim_trailing_whitespace = true  # 自动去掉行尾多余的空格
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
 
+# PHP 文件（PSR-12 推荐：4 空格缩进）
+[*.php]
+indent_size = 4
+
+# JSON 文件（一般是 2 空格缩进）
+[*.json]
+indent_size = 2
+
+# YAML 文件（社区推荐 2 空格缩进）
+[*.{yml,yaml}]
+indent_size = 2
+
+# docker-compose 文件（习惯用 4 空格缩进）
+[{compose.sample.yml,compose.yml}]
+indent_size = 4
+
+# Markdown 文件（保留行尾空格，避免破坏手动换行）
 [*.md]
 trim_trailing_whitespace = false
 
-[*.{yml,yaml}]
+# Shell 脚本（一般 2 空格缩进）
+[*.sh]
+indent_size = 2
+
+# Makefile 必须使用 Tab
+[Makefile]
+indent_style = tab
+
+# .env 文件（缩进没意义，但为了对齐用 2 空格）
+[*.env]
 indent_size = 2
