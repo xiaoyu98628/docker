@@ -24,7 +24,7 @@ indent_size = 2
 
 # docker-compose 文件（习惯用 4 空格缩进）
 [{compose.sample.yml,compose.yml}]
-indent_size = 4
+indent_size = 2
 
 # Markdown 文件（保留行尾空格，避免破坏手动换行）
 [*.md]
