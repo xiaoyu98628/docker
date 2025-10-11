@@ -18,7 +18,7 @@
     ```yaml
    # 例如
    include :
-   - php/8.2/compose.yml
+     - php/8.2/compose.yml
    # ... 其余不变
     ```
 4. 启动服务
