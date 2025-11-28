@@ -56,6 +56,10 @@ server {
     location /84/ {
         proxy_pass http://localhost:88/;
     }
+
+    location /85/ {
+        proxy_pass http://localhost:89/;
+    }
     # +------------------ end ------------------+
 
     #error_page  404              /404.html;
@@ -240,6 +244,25 @@ server{
     # php-fpm 进程状态监控
     location /fpm-status {
         include php/enable-php-84.conf;
+    }
+}
+
+server{
+    listen       89;
+    listen  [::]:89;
+    server_name  localhost;
+    root   /usr/share/nginx/html/localhost;
+    index  index.php index.html index.htm;
+
+    location ~ [^/]\.php(/|$) {
+        # 注意这里和php-fpm的挂载目录一致
+        root           /var/www/html/localhost;
+        include php/enable-php-85.conf;
+    }
+
+    # php-fpm 进程状态监控
+    location /fpm-status {
+        include php/enable-php-85.conf;
     }
 }
 # +------------------ end ------------------+
