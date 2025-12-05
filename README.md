@@ -34,7 +34,11 @@
    
    #  单独构建
    docker compose build --no-cache [镜像名]
+   # 例如
+   docker compose build --no-cache php82
    
    # 单独启动
    docker compose up -d [镜像名]
+   # 例如
+   docker compose up -d php82
    ```
