@@ -11,3 +11,10 @@
 # 排除 9 文件
 !9
 !9/**
+
+# 排除 readme 文件
+!readme
+!readme/**
+
+# 排除 README.md 文件
+!README.md

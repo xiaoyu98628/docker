@@ -1,0 +1,18 @@
+# 忽略当前文件夹下所有文件上传 git
+*
+
+# 排除 images 文件
+!images
+!images/**
+
+# 排除 .gitignore 文件
+!.gitignore
+
+# 排除 php-install-extensions.md 文件
+!php-install-extensions.md
+
+# 排除 supervisor.md 文件
+!supervisor.md
+
+# 排除 xdebug.md 文件
+!xdebug.md

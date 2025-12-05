@@ -11,3 +11,6 @@
 # 排除 express 文件
 !express
 !express/**
+
+# 排除 README.md 文件
+!README.md

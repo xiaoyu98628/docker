@@ -4,9 +4,5 @@
 # 排除 .gitignore 文件
 !.gitignore
 
-# 排除 3.11 文件
-!3.11
-!3.11/**
-
-# 排除 README.md 文件
-!README.md
+# 排除 mysql-user-permissions.md 文件
+!mysql-user-permissions.md

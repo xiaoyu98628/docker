@@ -19,3 +19,10 @@
 # 排除 8.5 文件
 !8.5
 !8.5/**
+
+# 排除 readme 文件
+!readme
+!readme/**
+
+# 排除 README.md 文件
+!README.md

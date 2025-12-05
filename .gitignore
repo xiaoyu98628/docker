@@ -44,6 +44,10 @@
 !rabbitmq
 !rabbitmq/**
 
+# 排除 readme 文件
+!readme
+!readme/**
+
 # 排除 redis 文件
 !redis
 !redis/**

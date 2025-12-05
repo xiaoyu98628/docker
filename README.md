@@ -47,38 +47,44 @@
 5. 启动服务
     ```shell
     # 批量启动
+    docker compose up -d [镜像名]
+    # 例如
     docker compose up -d
+    docker compose up -d php82
    
     #  单独构建
     docker compose build --no-cache [镜像名]
     # 例如
+    docker compose build --no-cache
     docker compose build --no-cache php82
    
-    # 单独启动
-    docker compose up -d [镜像名]
-    # 例如
-    docker compose up -d php82
-   
     # 查看运行日志
-    docker-compose logs -f
+    docker compose logs -f [镜像名]
+    # 例如
+    docker compose logs -f
+    docker compose logs -f php82
    
     # 停止并移除服务
-    docker-compose down
+    docker compose down [镜像名]
+    # 例如
+    docker compose down
+    docker compose down php82
    ```
 
 ## 📦 镜像列表
-| 服务名           | 版本                    | 说明 |
-|---------------|-----------------------|----|
-| Elasticsearch | 8.4.0 / 9.1.2         |    |
-| etcd          | 3.5.9                 |    |
-| jenkins       | 2.4.14                |    |
-| kibana        | 8.4.0 / 9.1.2         |    |
-| mongoDB       | 6.0                   |    |
-| MySQL         | 8 / 9                 |    |
-| Nginx         | 1.21 / 1.28           |    |
-| PHP           | 8.2 / 8.3 / 8.4 / 8.5 |    |
-| RabbitMQ      | 3.11                  |    |
-| Redis         | 6 / 7 / 8             |    |
+| 服务名           | 版本                    | 说明                                   |
+|---------------|-----------------------|--------------------------------------|
+| Elasticsearch | 8.4.0 / 9.1.2         | [README.md](elasticsearch/README.md) |
+| Etcd          | 3.5.9                 |                                      |
+| Jenkins       | 2.4.14                |                                      |
+| Kibana        | 8.4.0 / 9.1.2         | [README.md](kibana/README.md)        |
+| MongoDB       | 6.0                   | [README.md](mongo/README.md)         |
+| Mongo-Express | 6.0                   | [README.md](mongo/README.md)         |
+| MySQL         | 8 / 9                 | [README.md](mysql/README.md)         |
+| Nginx         | 1.21 / 1.28           | [README.md](nginx/README.md)         |
+| PHP           | 8.2 / 8.3 / 8.4 / 8.5 | [README.md](php/README.md)           |
+| RabbitMQ      | 3.11                  | [README.md](rabbitmq/README.md)      |
+| Redis         | 6 / 7 / 8             | [README.md](redis/README.md)         |
 
 ## 🔧 配置说明
 - **sample.env / 各服务目录下的 sample.env**：环境变量模板，请根据需要修改后改名为 .env
@@ -100,6 +106,13 @@
 2. 在子目录中添加 Dockerfile（如果需要构建镜像） + compose.sample.yml + sample.env
 3. 更新 README，描述新服务用途与注意事项
 4. 提交 PR／Push 即可
+
+## 🙏 致谢
+站在巨人的肩膀上。我们衷心感谢以下项目：
+* 搭建参考 **yeszao/dnmp** 仓库：<a href="https://github.com/yeszao/dnmp" target="_blank"> https://github.com/yeszao/dnmp </a>
+* 感谢 **docker-php-extension-installer** 快速安装PHP扩展脚本：<a href="https://github.com/mlocati/docker-php-extension-installer" target="_blank"> https://github.com/mlocati/docker-php-extension-installer </a>
+* 感谢 **acme.sh** 实现ACME客户端协议的纯Unix shell脚本：<a href="https://github.com/acmesh-official/acme.sh" target="_blank"> https://github.com/acmesh-official/acme.sh </a>
+* 感谢 **docker-nginx** 容器自动申请ssl证书脚本：<a href="https://github.com/xiaojun207/docker-nginx" target="_blank"> https://github.com/xiaojun207/docker-nginx </a>
 
 ## 📝 License
 [Apache-2.0](https://github.com/xiaoyu98628/docker/blob/main/LICENSE)
