@@ -65,11 +65,6 @@ RUN apk update && apk upgrade \
             echo "---------- Install bcmath ----------" \
             && docker-php-ext-install -j$(nproc) bcmath; \
         fi \
-    && if [ -z "${EXTENSIONS##*,opcache,*}" ]; \
-        then \
-            echo "---------- Install opcache ----------" \
-            && docker-php-ext-install -j$(nproc) opcache; \
-        fi \
     && if [ -z "${EXTENSIONS##*,gettext,*}" ]; \
         then \
             echo "---------- Install gettext ----------" \
