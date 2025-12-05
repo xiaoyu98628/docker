@@ -1,3 +1,4 @@
+# 来源 https://github.com/mlocati/docker-php-extension-installer
 FROM mlocati/php-extension-installer AS builder
 
 # 指定基于 php:8.5-fpm-alpine 创建
