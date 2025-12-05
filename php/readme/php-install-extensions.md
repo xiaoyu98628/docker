@@ -148,13 +148,13 @@ root@517b9c67507a:/tmp#
 案例
 
 ```dockerfile
-FROM php:7.2-fpm-alpine
+FROM php:8.2-fpm-alpine
 RUN apk update \
-    # 相关依赖必须手动安装
+    # 相关依赖必须手动安装 \
     && apk add --no-cache libjpeg-turbo-dev libwebp-dev libpng-dev freetype-dev \
-    # 安装扩展
+    # 安装扩展 \
     && docker-php-ext-install -j$(nproc) iconv mcrypt \
-    # 如果安装的扩展需要自定义配置时
+    # 如果安装的扩展需要自定义配置时 \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include --with-jpeg-dir=/usr/include --with-png-dir=/usr/include --with-webp-dir=/usr/include \
     && docker-php-ext-install -j$(nproc) gd
 ```
