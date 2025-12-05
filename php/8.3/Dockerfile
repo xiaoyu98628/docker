@@ -1,3 +1,5 @@
+FROM mlocati/php-extension-installer AS builder
+
 # 指定基于 php:8.3-fpm-alpine 创建
 FROM php:8.3-fpm-alpine
 
@@ -20,8 +22,9 @@ RUN if [ ${CONTAINER_PACKAGE_URL} ]; then sed -i "s/dl-cdn.alpinelinux.org/${CON
 # 修改时间
 RUN if [ ${TZ} ]; then apk add --no-cache --virtual .fetch-deps tzdata && cp -r "/usr/share/zoneinfo/${TZ}" /etc/localtime && echo "${TZ}" > /etc/timezone && apk del .fetch-deps; fi
 
-# 引入 install-php-extensions 和 docker-entrypoint 脚本 方便容器内安装扩展 和 清理残留 socket 文件
-ADD ./config/extensions/install-php-extensions /usr/local/bin/
+# 引入 install-php-extensions 脚本 方便容器内安装扩展
+COPY --from=builder /usr/bin/install-php-extensions /usr/local/bin/
+# 引入 docker-entrypoint 脚本 清理残留 socket 文件
 ADD ./config/extensions/docker-entrypoint /usr/local/bin/
 
 RUN chmod +x /usr/local/bin/install-php-extensions /usr/local/bin/docker-entrypoint \
