@@ -1,0 +1,14 @@
+# 忽略当前文件夹下所有文件上传 git
+*
+
+# 排除 .gitignore 文件
+!.gitignore
+
+# 排除 compose.sample.yml 文件
+!compose.sample.yml
+
+# 排除 Dockerfile 文件
+!Dockerfile
+
+# 排除 sample.env 文件
+!sample.env

@@ -36,6 +36,10 @@
 !nginx
 !nginx/**
 
+# 排除 node 文件
+!node
+!node/**
+
 # 排除 php 文件
 !php
 !php/**

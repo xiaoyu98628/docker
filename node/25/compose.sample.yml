@@ -1,0 +1,18 @@
+services:
+  node25:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        TZ: ${TZ}
+        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
+    container_name: node25
+    restart: always
+    ports:
+      - "8080:8080"
+    volumes:
+      - "project_directory:/www"    # 站点文件路径
+    stdin_open: true
+    tty: true
+    networks:
+      - docker
