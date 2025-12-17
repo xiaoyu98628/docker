@@ -7,7 +7,6 @@ services:
         CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
         PHP_EXTENSIONS: ${PHP_EXTENSIONS}
         COMPOSER_IMAGE_URL: ${COMPOSER_IMAGE_URL}
-        COMPOSER_DOWNLOAD_URL: ${COMPOSER_DOWNLOAD_URL}
         TZ: ${TZ}
     container_name: php83
     restart: always

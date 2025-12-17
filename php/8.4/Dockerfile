@@ -1,6 +1,3 @@
-# 来源 https://github.com/mlocati/docker-php-extension-installer
-FROM mlocati/php-extension-installer AS builder
-
 # 指定基于 php:8.4-fpm-alpine 创建
 FROM php:8.4-fpm-alpine
 
@@ -12,7 +9,6 @@ LABEL maintainer="XiaoYu <1765841705@qq.com>" \
 ARG CONTAINER_PACKAGE_URL
 ARG PHP_EXTENSIONS
 ARG COMPOSER_IMAGE_URL
-ARG COMPOSER_DOWNLOAD_URL
 ARG TZ
 
 ENV EXTENSIONS=",${PHP_EXTENSIONS},"
@@ -23,15 +19,18 @@ RUN if [ ${CONTAINER_PACKAGE_URL} ]; then sed -i "s/dl-cdn.alpinelinux.org/${CON
 # 修改时间
 RUN if [ ${TZ} ]; then apk add --no-cache --virtual .fetch-deps tzdata && cp -r "/usr/share/zoneinfo/${TZ}" /etc/localtime && echo "${TZ}" > /etc/timezone && apk del .fetch-deps; fi
 
+# 引入 composer
+COPY --from=composer/composer:latest /usr/bin/composer /usr/bin/composer
 # 引入 install-php-extensions 脚本 方便容器内安装扩展
-COPY --from=builder /usr/bin/install-php-extensions /usr/local/bin/
+COPY --from=mlocati/php-extension-installer:latest /usr/bin/install-php-extensions /usr/local/bin/
+
 # 引入 docker-entrypoint 脚本 清理残留 socket 文件
 ADD ./config/extensions/docker-entrypoint /usr/local/bin/
 
-RUN chmod +x /usr/local/bin/install-php-extensions /usr/local/bin/docker-entrypoint \
+RUN chmod +x /usr/local/bin/docker-entrypoint \
     && apk add --no-cache --virtual .dos-deps dos2unix \
     # 修改换行格式 将 Windows 下 CRLF 转换成 LF \
-    && dos2unix /usr/local/bin/install-php-extensions /usr/local/bin/docker-entrypoint \
+    && dos2unix /usr/local/bin/docker-entrypoint \
     && apk del .dos-deps
 
 # 更新包索引 安装扩展
@@ -281,11 +280,6 @@ RUN apk update && apk upgrade \
             && docker-php-ext-enable yaml; \
         fi \
     && docker-php-source delete \
-    # 安装 composer \
-    && echo "---------- Install composer ----------" \
-    && apk add --no-cache --virtual .build-deps curl \
-    && curl -sS ${COMPOSER_DOWNLOAD_URL} | php \
-    && chmod +x composer.phar && mv composer.phar /usr/local/bin/composer \
     # 替换 composer 镜像 \
     && if [ ${COMPOSER_IMAGE_URL} ]; then composer config -g repo.packagist composer ${COMPOSER_IMAGE_URL}; fi \
     && echo "---------- Install supervisor ----------" \
