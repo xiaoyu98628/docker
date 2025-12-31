@@ -11,6 +11,5 @@ services:
       - "TZ=${TZ}"
       - "POSTGRES_USER=${POSTGRES_USER}"
       - "POSTGRES_PASSWORD=${POSTGRES_PASSWORD}"
-      - "PGDATA=${PGDATA}"
     networks:
       - docker
