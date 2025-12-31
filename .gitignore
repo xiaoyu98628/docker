@@ -44,6 +44,10 @@
 !php
 !php/**
 
+# 排除 postgres 文件
+!postgres
+!postgres/**
+
 # 排除 rabbitmq 文件
 !rabbitmq
 !rabbitmq/**
