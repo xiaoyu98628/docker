@@ -1,8 +1,9 @@
 # 忽略当前文件夹下所有文件上传 git
 *
 
-# 忽略 MacOS 系统特有文件
-.DS_Store
+# 忽略 .github 系统特有文件
+!.github
+!.github/**
 
 # 排除 config 文件
 !config

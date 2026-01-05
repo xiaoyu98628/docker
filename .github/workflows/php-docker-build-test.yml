@@ -1,0 +1,110 @@
+name: PHP Docker 镜像构建测试
+
+on:
+  push:
+    branches: [ main, master, develop ]
+    paths:
+      - 'php/**'
+      - '.github/workflows/php-docker-build-test.yml'
+  pull_request:
+    branches: [ main, master, develop ]
+    paths:
+      - 'php/**'
+      - '.github/workflows/php-docker-build-test.yml'
+  workflow_dispatch: # 手动触发工作流程
+  schedule:
+    - cron: '0 0 * * 1' # 每周一 0点（UTC），相当于中国时间每周一凌晨8点
+
+env:
+  TZ: Asia/Shanghai
+  CONTAINER_PACKAGE_URL: mirrors.aliyun.com
+  COMPOSER_IMAGE_URL: https://mirrors.aliyun.com/composer
+
+jobs:
+  # PHP 8.2
+  build-php-82:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      - name: 准备 compose.yml 文件
+        working-directory: php/8.2
+        run: cp compose.sample.yml compose.yml
+      - name: 设置环境变量
+        working-directory: php/8.2
+        run: |
+          echo "TZ=${{ env.TZ }}" > .env
+          echo "CONTAINER_PACKAGE_URL=${{ env.CONTAINER_PACKAGE_URL }}" >> .env
+          echo "PHP_EXTENSIONS=${{ env.PHP_EXTENSIONS }}" >> .env
+          echo "COMPOSER_IMAGE_URL=${{ env.COMPOSER_IMAGE_URL }}" >> .env
+      - name: 构建 PHP 8.2 镜像
+        working-directory: php/8.2
+        run: docker compose build --no-cache
+      - name: 验证镜像
+        run: echo "✅ PHP 8.2 镜像构建成功"
+
+  # PHP 8.3
+  build-php-83:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      - name: 准备 compose.yml 文件
+        working-directory: php/8.3
+        run: cp compose.sample.yml compose.yml
+      - name: 设置环境变量
+        working-directory: php/8.3
+        run: |
+          echo "TZ=${{ env.TZ }}" > .env
+          echo "CONTAINER_PACKAGE_URL=${{ env.CONTAINER_PACKAGE_URL }}" >> .env
+          echo "PHP_EXTENSIONS=${{ env.PHP_EXTENSIONS }}" >> .env
+          echo "COMPOSER_IMAGE_URL=${{ env.COMPOSER_IMAGE_URL }}" >> .env
+      - name: 构建 PHP 8.3 镜像
+        working-directory: php/8.3
+        run: docker compose build --no-cache
+      - name: 验证镜像
+        run: echo "✅ PHP 8.3 镜像构建成功"
+
+  # PHP 8.4
+  build-php-84:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      - name: 准备 compose.yml 文件
+        working-directory: php/8.4
+        run: cp compose.sample.yml compose.yml
+      - name: 设置环境变量
+        working-directory: php/8.4
+        run: |
+          echo "TZ=${{ env.TZ }}" > .env
+          echo "CONTAINER_PACKAGE_URL=${{ env.CONTAINER_PACKAGE_URL }}" >> .env
+          echo "PHP_EXTENSIONS=${{ env.PHP_EXTENSIONS }}" >> .env
+          echo "COMPOSER_IMAGE_URL=${{ env.COMPOSER_IMAGE_URL }}" >> .env
+      - name: 构建 PHP 8.4 镜像
+        working-directory: php/8.4
+        run: docker compose build --no-cache
+      - name: 验证镜像
+        run: echo "✅ PHP 8.4 镜像构建成功"
+
+  # PHP 8.5
+  build-php-85:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      - name: 准备 compose.yml 文件
+        working-directory: php/8.5
+        run: cp compose.sample.yml compose.yml
+      - name: 设置环境变量
+        working-directory: php/8.5
+        run: |
+          echo "TZ=${{ env.TZ }}" > .env
+          echo "CONTAINER_PACKAGE_URL=${{ env.CONTAINER_PACKAGE_URL }}" >> .env
+          echo "PHP_EXTENSIONS=${{ env.PHP_EXTENSIONS }}" >> .env
+          echo "COMPOSER_IMAGE_URL=${{ env.COMPOSER_IMAGE_URL }}" >> .env
+      - name: 构建 PHP 8.5 镜像
+        working-directory: php/8.5
+        run: docker compose build --no-cache
+      - name: 验证镜像
+        run: echo "✅ PHP 8.5 镜像构建成功"
