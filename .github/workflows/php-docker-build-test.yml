@@ -19,6 +19,7 @@ env:
   TZ: Asia/Shanghai
   CONTAINER_PACKAGE_URL: mirrors.aliyun.com
   COMPOSER_IMAGE_URL: https://mirrors.aliyun.com/composer
+  PHP_EXTENSIONS: pdo_mysql,redis,gd
 
 jobs:
   # PHP 8.2
