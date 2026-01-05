@@ -39,7 +39,7 @@ jobs:
           echo "    driver: local" >> compose.yml
           echo "    driver_opts:" >> compose.yml
           echo "      type: none" >> compose.yml
-          echo "      device: ./config" >> compose.yml
+          echo "      device: ../../config" >> compose.yml
           echo "      o: bind" >> compose.yml
           echo "  project_directory:" >> compose.yml
           echo "    driver: local" >> compose.yml
@@ -85,7 +85,7 @@ jobs:
           echo "    driver: local" >> compose.yml
           echo "    driver_opts:" >> compose.yml
           echo "      type: none" >> compose.yml
-          echo "      device: ./config" >> compose.yml
+          echo "      device: ../../config" >> compose.yml
           echo "      o: bind" >> compose.yml
           echo "  project_directory:" >> compose.yml
           echo "    driver: local" >> compose.yml
@@ -131,7 +131,7 @@ jobs:
           echo "    driver: local" >> compose.yml
           echo "    driver_opts:" >> compose.yml
           echo "      type: none" >> compose.yml
-          echo "      device: ./config" >> compose.yml
+          echo "      device: ../../config" >> compose.yml
           echo "      o: bind" >> compose.yml
           echo "  project_directory:" >> compose.yml
           echo "    driver: local" >> compose.yml
@@ -177,7 +177,7 @@ jobs:
           echo "    driver: local" >> compose.yml
           echo "    driver_opts:" >> compose.yml
           echo "      type: none" >> compose.yml
-          echo "      device: ./config" >> compose.yml
+          echo "      device: ../../config" >> compose.yml
           echo "      o: bind" >> compose.yml
           echo "  project_directory:" >> compose.yml
           echo "    driver: local" >> compose.yml
