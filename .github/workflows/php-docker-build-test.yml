@@ -30,7 +30,14 @@ jobs:
         uses: actions/checkout@v4
       - name: 准备 compose.yml 文件
         working-directory: php/8.2
-        run: cp compose.sample.yml compose.yml
+        run: |
+          cp compose.sample.yml compose.yml
+          # 添加网络定义到 compose.yml
+          echo "" >> compose.yml
+          echo "networks:" >> compose.yml
+          echo "  docker:" >> compose.yml
+          echo "    name: docker" >> compose.yml
+          echo "    driver: bridge" >> compose.yml
       - name: 设置环境变量
         working-directory: php/8.2
         run: |
@@ -52,7 +59,14 @@ jobs:
         uses: actions/checkout@v4
       - name: 准备 compose.yml 文件
         working-directory: php/8.3
-        run: cp compose.sample.yml compose.yml
+        run: |
+          cp compose.sample.yml compose.yml
+          # 添加网络定义到 compose.yml
+          echo "" >> compose.yml
+          echo "networks:" >> compose.yml
+          echo "  docker:" >> compose.yml
+          echo "    name: docker" >> compose.yml
+          echo "    driver: bridge" >> compose.yml
       - name: 设置环境变量
         working-directory: php/8.3
         run: |
@@ -74,7 +88,14 @@ jobs:
         uses: actions/checkout@v4
       - name: 准备 compose.yml 文件
         working-directory: php/8.4
-        run: cp compose.sample.yml compose.yml
+        run: |
+          cp compose.sample.yml compose.yml
+          # 添加网络定义到 compose.yml
+          echo "" >> compose.yml
+          echo "networks:" >> compose.yml
+          echo "  docker:" >> compose.yml
+          echo "    name: docker" >> compose.yml
+          echo "    driver: bridge" >> compose.yml
       - name: 设置环境变量
         working-directory: php/8.4
         run: |
@@ -96,7 +117,14 @@ jobs:
         uses: actions/checkout@v4
       - name: 准备 compose.yml 文件
         working-directory: php/8.5
-        run: cp compose.sample.yml compose.yml
+        run: |
+          cp compose.sample.yml compose.yml
+          # 添加网络定义到 compose.yml
+          echo "" >> compose.yml
+          echo "networks:" >> compose.yml
+          echo "  docker:" >> compose.yml
+          echo "    name: docker" >> compose.yml
+          echo "    driver: bridge" >> compose.yml
       - name: 设置环境变量
         working-directory: php/8.5
         run: |
