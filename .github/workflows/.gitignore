@@ -18,3 +18,6 @@
 
 # 排除 php-docker-build-test.yml 文件
 !php-docker-build-test.yml
+
+# 排除 rabbitmq-docker-build-test.yml 文件
+!rabbitmq-docker-build-test.yml
