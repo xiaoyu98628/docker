@@ -4,5 +4,8 @@
 # 排除 .gitignore 文件
 !.gitignore
 
+# 排除 build-php85-test.yml 文件
+!build-php85-test.yml
+
 # 排除 php-docker-build-test.yml 文件
 !php-docker-build-test.yml

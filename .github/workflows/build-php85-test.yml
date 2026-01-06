@@ -1,0 +1,63 @@
+name: PHP Docker 镜像构建测试
+
+on:
+  workflow_dispatch: # 手动触发工作流程
+  schedule:
+    - cron: '0 0 * * *' # 每周一 0点（UTC），相当于中国时间每周一凌晨8点
+
+env:
+  TZ: Asia/Shanghai
+  CONTAINER_PACKAGE_URL: mirrors.aliyun.com
+  COMPOSER_IMAGE_URL: https://mirrors.aliyun.com/composer
+
+jobs:
+  # PHP 8.5
+  build-php-85:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      - name: 准备 compose.yml 文件
+        working-directory: php/8.5
+        run: |
+          cp compose.sample.yml compose.yml
+          # 添加 volumes 和 networks 定义到 compose.yml
+          echo "" >> compose.yml
+          echo "volumes:" >> compose.yml
+          echo "  config_directory:" >> compose.yml
+          echo "    driver: local" >> compose.yml
+          echo "    driver_opts:" >> compose.yml
+          echo "      type: none" >> compose.yml
+          echo "      device: ../../config" >> compose.yml
+          echo "      o: bind" >> compose.yml
+          echo "  project_directory:" >> compose.yml
+          echo "    driver: local" >> compose.yml
+          echo "    driver_opts:" >> compose.yml
+          echo "      type: none" >> compose.yml
+          echo "      device: /tmp/project" >> compose.yml
+          echo "      o: bind" >> compose.yml
+          echo "networks:" >> compose.yml
+          echo "  docker:" >> compose.yml
+          echo "    name: docker" >> compose.yml
+          echo "    driver: bridge" >> compose.yml
+      - name: 设置环境变量
+        working-directory: php/8.5
+        run: |
+          echo "TZ=${{ env.TZ }}" > .env
+          echo "CONTAINER_PACKAGE_URL=${{ env.CONTAINER_PACKAGE_URL }}" >> .env
+          echo "PHP_EXTENSIONS=swoole,phalcon,grpc" >> .env
+          echo "COMPOSER_IMAGE_URL=${{ env.COMPOSER_IMAGE_URL }}" >> .env
+      - name: 创建必要的目录
+        working-directory: php/8.5
+        run: |
+          mkdir -p /tmp/project
+      - name: 构建 PHP 8.5 镜像
+        working-directory: php/8.5
+        run: docker compose build --no-cache
+      - name: 验证镜像
+        working-directory: php/8.5
+        run: |
+          echo "✅ PHP 8.5 镜像构建成功"
+          docker compose up -d php85
+          docker compose exec php85 php -v
+          docker compose exec php85 php -m
