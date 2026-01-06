@@ -50,7 +50,7 @@ jobs:
       - name: 创建必要的目录并调整权限
         working-directory: rabbitmq/3.11
         run: |
-          chmod -R 755 data logs
+          chmod -R 777 logs
       - name: 构建 RabbitMQ 3.11 镜像
         working-directory: rabbitmq/3.11
         run: docker compose build --no-cache
