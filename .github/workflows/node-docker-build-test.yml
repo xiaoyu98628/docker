@@ -1,0 +1,64 @@
+name: Node Docker 镜像构建测试
+
+on:
+  push:
+    branches: [ main, master, develop ]
+    paths:
+      - 'node/**'
+      - '.github/workflows/node-docker-build-test.yml'
+  pull_request:
+    branches: [ main, master, develop ]
+    paths:
+      - 'node/**'
+      - '.github/workflows/node-docker-build-test.yml'
+  workflow_dispatch: # 手动触发工作流程
+  schedule:
+    - cron: '0 0 * * 1' # 每周一 0点（UTC），相当于中国时间每周一凌晨8点
+
+env:
+  TZ: Asia/Shanghai
+  CONTAINER_PACKAGE_URL: mirrors.aliyun.com
+
+jobs:
+  # Node 25
+  build-node-25:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      - name: 准备 compose.yml 文件
+        working-directory: node/25
+        run: |
+          cp compose.sample.yml compose.yml
+          # 添加 volumes 和 networks 定义到 compose.yml
+          echo "" >> compose.yml
+          echo "volumes:" >> compose.yml
+          echo "  project_directory:" >> compose.yml
+          echo "    driver: local" >> compose.yml
+          echo "    driver_opts:" >> compose.yml
+          echo "      type: none" >> compose.yml
+          echo "      device: /tmp/project" >> compose.yml
+          echo "      o: bind" >> compose.yml
+          echo "networks:" >> compose.yml
+          echo "  docker:" >> compose.yml
+          echo "    name: docker" >> compose.yml
+          echo "    driver: bridge" >> compose.yml
+      - name: 设置环境变量
+        working-directory: node/25
+        run: |
+          echo "TZ=${{ env.TZ }}" > .env
+          echo "CONTAINER_PACKAGE_URL=${{ env.CONTAINER_PACKAGE_URL }}" >> .env
+      - name: 创建必要的目录
+        working-directory: node/25
+        run: |
+          mkdir -p /tmp/project
+      - name: 构建 Node 25 镜像
+        working-directory: node/25
+        run: docker compose build --no-cache
+      - name: 验证镜像
+        working-directory: node/25
+        run: |
+          echo "✅ Node 25 镜像构建成功"
+          docker compose up -d node25
+          docker compose exec node25 node --version
+          docker compose exec node25 npm --version

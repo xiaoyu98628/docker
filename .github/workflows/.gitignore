@@ -10,6 +10,9 @@
 # 排除 mysql-docker-build-test.yml 文件
 !mysql-docker-build-test.yml
 
+# 排除 node-docker-build-test.yml 文件
+!node-docker-build-test.yml
+
 # 排除 nginx-docker-build-test.yml 文件
 !nginx-docker-build-test.yml
 
