@@ -1,0 +1,60 @@
+name: RabbitMQ Docker 镜像构建测试
+
+on:
+  push:
+    branches: [ main, master, develop ]
+    paths:
+      - 'rabbitmq/**'
+      - '.github/workflows/rabbitmq-docker-build-test.yml'
+  pull_request:
+    branches: [ main, master, develop ]
+    paths:
+      - 'rabbitmq/**'
+      - '.github/workflows/rabbitmq-docker-build-test.yml'
+  workflow_dispatch: # 手动触发工作流程
+  schedule:
+    - cron: '0 0 * * 1' # 每周一 0点（UTC），相当于中国时间每周一凌晨8点
+
+env:
+  TZ: Asia/Shanghai
+  CONTAINER_PACKAGE_URL: mirrors.aliyun.com
+  RABBITMQ_PLUGINS: rabbitmq_management
+  RABBITMQ_DEFAULT_USER: root
+  RABBITMQ_DEFAULT_PASS: root
+
+jobs:
+  # RabbitMQ 3.11
+  build-rabbitmq-311:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      - name: 准备 compose.yml 文件
+        working-directory: rabbitmq/3.11
+        run: |
+          cp compose.sample.yml compose.yml
+          # 添加 networks 定义到 compose.yml
+          echo "" >> compose.yml
+          echo "networks:" >> compose.yml
+          echo "  docker:" >> compose.yml
+          echo "    name: docker" >> compose.yml
+          echo "    driver: bridge" >> compose.yml
+      - name: 设置环境变量
+        working-directory: rabbitmq/3.11
+        run: |
+          echo "TZ=${{ env.TZ }}" > .env
+          echo "CONTAINER_PACKAGE_URL=${{ env.CONTAINER_PACKAGE_URL }}" >> .env
+          echo "RABBITMQ_PLUGINS=${{ env.RABBITMQ_PLUGINS }}" >> .env
+          echo "RABBITMQ_DEFAULT_USER=${{ env.RABBITMQ_DEFAULT_USER }}" >> .env
+          echo "RABBITMQ_DEFAULT_PASS=${{ env.RABBITMQ_DEFAULT_PASS }}" >> .env
+      - name: 构建 RabbitMQ 3.11 镜像
+        working-directory: rabbitmq/3.11
+        run: docker compose build --no-cache
+      - name: 验证镜像
+        working-directory: rabbitmq/3.11
+        run: |
+          echo "✅ RabbitMQ 3.11 镜像构建成功"
+          docker compose up -d rabbitmq3.11
+          sleep 10
+          docker compose exec rabbitmq3.11 rabbitmq-diagnostics ping
+          docker compose exec rabbitmq3.11 rabbitmqctl status
