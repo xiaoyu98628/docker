@@ -60,12 +60,15 @@ jobs:
       - name: 创建必要的目录
         working-directory: php/8.2
         run: |
-          mkdir -p config logs /tmp/project
+          mkdir -p /tmp/project
       - name: 构建 PHP 8.2 镜像
         working-directory: php/8.2
         run: docker compose build --no-cache
       - name: 验证镜像
-        run: echo "✅ PHP 8.2 镜像构建成功"
+        run: |
+          echo "✅ PHP 8.2 镜像构建成功"
+          docker compose exec php82 php -v
+          docker compose exec php82 php -m
 
   # PHP 8.3
   build-php-83:
@@ -106,12 +109,15 @@ jobs:
       - name: 创建必要的目录
         working-directory: php/8.3
         run: |
-          mkdir -p config logs /tmp/project
+          mkdir -p /tmp/project
       - name: 构建 PHP 8.3 镜像
         working-directory: php/8.3
         run: docker compose build --no-cache
       - name: 验证镜像
-        run: echo "✅ PHP 8.3 镜像构建成功"
+        run: |
+          echo "✅ PHP 8.3 镜像构建成功"
+          docker compose exec php83 php -v
+          docker compose exec php83 php -m
 
   # PHP 8.4
   build-php-84:
@@ -152,12 +158,15 @@ jobs:
       - name: 创建必要的目录
         working-directory: php/8.4
         run: |
-          mkdir -p config logs /tmp/project
+          mkdir -p /tmp/project
       - name: 构建 PHP 8.4 镜像
         working-directory: php/8.4
         run: docker compose build --no-cache
       - name: 验证镜像
-        run: echo "✅ PHP 8.4 镜像构建成功"
+        run: |
+          echo "✅ PHP 8.4 镜像构建成功"
+          docker compose exec php84 php -v
+          docker compose exec php84 php -m
 
   # PHP 8.5
   build-php-85:
@@ -198,9 +207,12 @@ jobs:
       - name: 创建必要的目录
         working-directory: php/8.5
         run: |
-          mkdir -p config logs /tmp/project
+          mkdir -p /tmp/project
       - name: 构建 PHP 8.5 镜像
         working-directory: php/8.5
         run: docker compose build --no-cache
       - name: 验证镜像
-        run: echo "✅ PHP 8.5 镜像构建成功"
+        run: |
+          echo "✅ PHP 8.5 镜像构建成功"
+          docker compose exec php85 php -v
+          docker compose exec php85 php -m
