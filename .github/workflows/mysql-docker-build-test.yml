@@ -18,7 +18,7 @@ on:
 env:
   TZ: Asia/Shanghai
   MYSQL_ROOT_PASSWORD: root
-  MYSQL_ROOT_HOST: *
+  MYSQL_ROOT_HOST: localhost
   MYSQL_USER: admin
   MYSQL_PASSWORD: admin
 
