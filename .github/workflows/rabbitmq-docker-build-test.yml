@@ -47,6 +47,12 @@ jobs:
           echo "RABBITMQ_PLUGINS=${{ env.RABBITMQ_PLUGINS }}" >> .env
           echo "RABBITMQ_DEFAULT_USER=${{ env.RABBITMQ_DEFAULT_USER }}" >> .env
           echo "RABBITMQ_DEFAULT_PASS=${{ env.RABBITMQ_DEFAULT_PASS }}" >> .env
+      - name: 创建必要的目录并调整权限
+        working-directory: rabbitmq/3.11
+        run: |
+          mkdir -p data logs config/conf.d
+          chown -R 999:999 data logs
+          chmod -R 755 data logs
       - name: 构建 RabbitMQ 3.11 镜像
         working-directory: rabbitmq/3.11
         run: docker compose build --no-cache
@@ -55,6 +61,6 @@ jobs:
         run: |
           echo "✅ RabbitMQ 3.11 镜像构建成功"
           docker compose up -d rabbitmq3.11
-          sleep 10
-          docker compose exec rabbitmq3.11 rabbitmq-diagnostics ping
+          sleep 15
+          docker compose exec rabbitmq3.11 rabbitmq-diagnostics ping || { docker compose logs rabbitmq3.11; exit 1; }
           docker compose exec rabbitmq3.11 rabbitmqctl status
