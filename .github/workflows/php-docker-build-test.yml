@@ -19,7 +19,6 @@ env:
   TZ: Asia/Shanghai
   CONTAINER_PACKAGE_URL: mirrors.aliyun.com
   COMPOSER_IMAGE_URL: https://mirrors.aliyun.com/composer
-  PHP_EXTENSIONS: pdo_mysql,redis,gd
 
 jobs:
   # PHP 8.2
@@ -56,7 +55,7 @@ jobs:
         run: |
           echo "TZ=${{ env.TZ }}" > .env
           echo "CONTAINER_PACKAGE_URL=${{ env.CONTAINER_PACKAGE_URL }}" >> .env
-          echo "PHP_EXTENSIONS=${{ env.PHP_EXTENSIONS }}" >> .env
+          echo "PHP_EXTENSIONS=pdo_mysql,pcntl,mysqli,exif,bcmath,opcache,gettext,gd,sockets,shmop,intl,bz2,soap,zip,sysvmsg,sysvsem,sysvshm,xsl,calendar,tidy,snmp,amqp,apcu,rdkafka,redis,swoole,memcached,xdebug,mongodb,protobuf,grpc,xlswriter,igbinary,imagick,psr,phalcon,mcrypt,yaml" >> .env
           echo "COMPOSER_IMAGE_URL=${{ env.COMPOSER_IMAGE_URL }}" >> .env
       - name: 创建必要的目录
         working-directory: php/8.2
@@ -102,7 +101,7 @@ jobs:
         run: |
           echo "TZ=${{ env.TZ }}" > .env
           echo "CONTAINER_PACKAGE_URL=${{ env.CONTAINER_PACKAGE_URL }}" >> .env
-          echo "PHP_EXTENSIONS=${{ env.PHP_EXTENSIONS }}" >> .env
+          echo "PHP_EXTENSIONS=pdo_mysql,pcntl,mysqli,exif,bcmath,opcache,gettext,gd,sockets,shmop,intl,bz2,soap,zip,sysvmsg,sysvsem,sysvshm,xsl,calendar,tidy,snmp,amqp,apcu,rdkafka,redis,swoole,memcached,xdebug,mongodb,protobuf,grpc,xlswriter,igbinary,imagick,psr,phalcon,mcrypt,yaml" >> .env
           echo "COMPOSER_IMAGE_URL=${{ env.COMPOSER_IMAGE_URL }}" >> .env
       - name: 创建必要的目录
         working-directory: php/8.3
@@ -148,7 +147,7 @@ jobs:
         run: |
           echo "TZ=${{ env.TZ }}" > .env
           echo "CONTAINER_PACKAGE_URL=${{ env.CONTAINER_PACKAGE_URL }}" >> .env
-          echo "PHP_EXTENSIONS=${{ env.PHP_EXTENSIONS }}" >> .env
+          echo "PHP_EXTENSIONS=pdo_mysql,pcntl,mysqli,exif,bcmath,opcache,gettext,gd,sockets,shmop,intl,bz2,soap,zip,sysvmsg,sysvsem,sysvshm,xsl,calendar,tidy,snmp,amqp,apcu,rdkafka,redis,swoole,memcached,xdebug,mongodb,protobuf,grpc,xlswriter,igbinary,imagick,psr,phalcon,yaml" >> .env
           echo "COMPOSER_IMAGE_URL=${{ env.COMPOSER_IMAGE_URL }}" >> .env
       - name: 创建必要的目录
         working-directory: php/8.4
@@ -194,7 +193,7 @@ jobs:
         run: |
           echo "TZ=${{ env.TZ }}" > .env
           echo "CONTAINER_PACKAGE_URL=${{ env.CONTAINER_PACKAGE_URL }}" >> .env
-          echo "PHP_EXTENSIONS=${{ env.PHP_EXTENSIONS }}" >> .env
+          echo "PHP_EXTENSIONS=pdo_mysql,pcntl,mysqli,exif,bcmath,gettext,gd,sockets,shmop,intl,bz2,soap,zip,sysvmsg,sysvsem,sysvshm,xsl,calendar,tidy,snmp,amqp,apcu,rdkafka,redis,swoole,memcached,xdebug,mongodb,protobuf,grpc,xlswriter,igbinary,imagick,psr,phalcon,yaml" >> .env
           echo "COMPOSER_IMAGE_URL=${{ env.COMPOSER_IMAGE_URL }}" >> .env
       - name: 创建必要的目录
         working-directory: php/8.5
