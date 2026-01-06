@@ -50,8 +50,6 @@ jobs:
       - name: 创建必要的目录并调整权限
         working-directory: rabbitmq/3.11
         run: |
-          mkdir -p data logs config/conf.d
-          chown -R 999:999 data logs
           chmod -R 755 data logs
       - name: 构建 RabbitMQ 3.11 镜像
         working-directory: rabbitmq/3.11
