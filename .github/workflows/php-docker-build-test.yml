@@ -65,8 +65,10 @@ jobs:
         working-directory: php/8.2
         run: docker compose build --no-cache
       - name: 验证镜像
+        working-directory: php/8.2
         run: |
           echo "✅ PHP 8.2 镜像构建成功"
+          docker compose up -d php82
           docker compose exec php82 php -v
           docker compose exec php82 php -m
 
@@ -114,8 +116,10 @@ jobs:
         working-directory: php/8.3
         run: docker compose build --no-cache
       - name: 验证镜像
+        working-directory: php/8.3
         run: |
           echo "✅ PHP 8.3 镜像构建成功"
+          docker compose up -d php83
           docker compose exec php83 php -v
           docker compose exec php83 php -m
 
@@ -163,8 +167,10 @@ jobs:
         working-directory: php/8.4
         run: docker compose build --no-cache
       - name: 验证镜像
+        working-directory: php/8.4
         run: |
           echo "✅ PHP 8.4 镜像构建成功"
+          docker compose up -d php84
           docker compose exec php84 php -v
           docker compose exec php84 php -m
 
@@ -212,7 +218,9 @@ jobs:
         working-directory: php/8.5
         run: docker compose build --no-cache
       - name: 验证镜像
+        working-directory: php/8.5
         run: |
           echo "✅ PHP 8.5 镜像构建成功"
+          docker compose up -d php85
           docker compose exec php85 php -v
           docker compose exec php85 php -m
