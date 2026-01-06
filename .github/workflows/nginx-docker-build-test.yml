@@ -1,0 +1,131 @@
+name: Nginx Docker 镜像构建测试
+
+on:
+  push:
+    branches: [ main, master, develop ]
+    paths:
+      - 'nginx/**'
+      - '.github/workflows/nginx-docker-build-test.yml'
+  pull_request:
+    branches: [ main, master, develop ]
+    paths:
+      - 'nginx/**'
+      - '.github/workflows/nginx-docker-build-test.yml'
+  workflow_dispatch: # 手动触发工作流程
+  schedule:
+    - cron: '0 0 * * 1' # 每周一 0点（UTC），相当于中国时间每周一凌晨8点
+
+env:
+  TZ: Asia/Shanghai
+  CONTAINER_PACKAGE_URL: mirrors.aliyun.com
+
+jobs:
+  # Nginx 1.21
+  build-nginx-121:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      - name: 准备 compose.yml 文件
+        working-directory: nginx/1.21
+        run: |
+          cp compose.sample.yml compose.yml
+          # 添加 volumes 和 networks 定义到 compose.yml
+          echo "" >> compose.yml
+          echo "volumes:" >> compose.yml
+          echo "  config_directory:" >> compose.yml
+          echo "    driver: local" >> compose.yml
+          echo "    driver_opts:" >> compose.yml
+          echo "      type: none" >> compose.yml
+          echo "      device: ../../config" >> compose.yml
+          echo "      o: bind" >> compose.yml
+          echo "  project_directory:" >> compose.yml
+          echo "    driver: local" >> compose.yml
+          echo "    driver_opts:" >> compose.yml
+          echo "      type: none" >> compose.yml
+          echo "      device: /tmp/project" >> compose.yml
+          echo "      o: bind" >> compose.yml
+          echo "networks:" >> compose.yml
+          echo "  docker:" >> compose.yml
+          echo "    name: docker" >> compose.yml
+          echo "    driver: bridge" >> compose.yml
+      - name: 设置环境变量
+        working-directory: nginx/1.21
+        run: |
+          echo "TZ=${{ env.TZ }}" > .env
+          echo "CONTAINER_PACKAGE_URL=${{ env.CONTAINER_PACKAGE_URL }}" >> .env
+          echo "NGINX_REGISTER_ACME_MAIL=" >> .env
+          echo "NGINX_SSL_DOMAINS=" >> .env
+          echo "NGINX_SSL_SERVER=letsencrypt" >> .env
+          echo "NGINX_SSL_BASE_DIR=/usr/config/nginx/ssl/1.21" >> .env
+          echo "NGINX_SSL_DNS=" >> .env
+          echo "NGINX_RELOAD_CMD=nginx -s reload" >> .env
+      - name: 创建必要的目录
+        working-directory: nginx/1.21
+        run: |
+          mkdir -p /tmp/project
+      - name: 构建 Nginx 1.21 镜像
+        working-directory: nginx/1.21
+        run: docker compose build --no-cache
+      - name: 验证镜像
+        working-directory: nginx/1.21
+        run: |
+          echo "✅ Nginx 1.21 镜像构建成功"
+          docker compose up -d nginx1.21
+          docker compose exec nginx1.21 nginx -v
+          docker compose exec nginx1.21 nginx -t
+
+  # Nginx 1.28
+  build-nginx-128:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      - name: 准备 compose.yml 文件
+        working-directory: nginx/1.28
+        run: |
+          cp compose.sample.yml compose.yml
+          # 添加 volumes 和 networks 定义到 compose.yml
+          echo "" >> compose.yml
+          echo "volumes:" >> compose.yml
+          echo "  config_directory:" >> compose.yml
+          echo "    driver: local" >> compose.yml
+          echo "    driver_opts:" >> compose.yml
+          echo "      type: none" >> compose.yml
+          echo "      device: ../../config" >> compose.yml
+          echo "      o: bind" >> compose.yml
+          echo "  project_directory:" >> compose.yml
+          echo "    driver: local" >> compose.yml
+          echo "    driver_opts:" >> compose.yml
+          echo "      type: none" >> compose.yml
+          echo "      device: /tmp/project" >> compose.yml
+          echo "      o: bind" >> compose.yml
+          echo "networks:" >> compose.yml
+          echo "  docker:" >> compose.yml
+          echo "    name: docker" >> compose.yml
+          echo "    driver: bridge" >> compose.yml
+      - name: 设置环境变量
+        working-directory: nginx/1.28
+        run: |
+          echo "TZ=${{ env.TZ }}" > .env
+          echo "CONTAINER_PACKAGE_URL=${{ env.CONTAINER_PACKAGE_URL }}" >> .env
+          echo "NGINX_REGISTER_ACME_MAIL=" >> .env
+          echo "NGINX_SSL_DOMAINS=" >> .env
+          echo "NGINX_SSL_SERVER=letsencrypt" >> .env
+          echo "NGINX_SSL_BASE_DIR=/usr/config/nginx/ssl/1.28" >> .env
+          echo "NGINX_SSL_DNS=" >> .env
+          echo "NGINX_RELOAD_CMD=nginx -s reload" >> .env
+      - name: 创建必要的目录
+        working-directory: nginx/1.28
+        run: |
+          mkdir -p /tmp/project
+      - name: 构建 Nginx 1.28 镜像
+        working-directory: nginx/1.28
+        run: docker compose build --no-cache
+      - name: 验证镜像
+        working-directory: nginx/1.28
+        run: |
+          echo "✅ Nginx 1.28 镜像构建成功"
+          docker compose up -d nginx1.28
+          docker compose exec nginx1.28 nginx -v
+          docker compose exec nginx1.28 nginx -t
