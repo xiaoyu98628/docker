@@ -1,11 +1,9 @@
-# xiaoyu98628/docker
+> 一个用于构建与快速启动多种服务的 Docker 镜像集合 / Docker Compose 集合
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0) 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)]()
 
-> 一个用于构建与快速启动多种服务的 Docker 镜像集合 / Docker-Compose 集合
-
-本项目包含多个服务（如 `PHP`, `MySQL`, `Redis`, `Nginx` 等）的 `Dockerfile` 与 `docker-compose` 配置，方便统一构建、部署和本地开发使用。
+本项目包含多个服务（如 `PHP`, `MySQL`, `Redis`, `Nginx` 等）的 `Dockerfile` 与 `docker compose` 配置，方便统一构建、部署和本地开发使用。
 
 # QQ交流群: 544315207
 
@@ -88,7 +86,7 @@
 
 ## 🔧 配置说明
 - **sample.env / 各服务目录下的 sample.env**：环境变量模板，请根据需要修改后改名为 .env
-- **compose.sample.yml / 各服务目录下的 compose.sample.yml**：docker-compose 模板，改名为 compose.yml 后即可使用
+- **compose.sample.yml / 各服务目录下的 compose.sample.yml**：`docker compose` 模板，改名为 compose.yml 后即可使用
 - 各服务镜像使用独立子目录管理，便于版本控制与组合配置
 
 ## 📚 推荐用途
