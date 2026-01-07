@@ -14,10 +14,10 @@ ARG TZ
 ENV EXTENSIONS=",${PHP_EXTENSIONS},"
 
 # 资源替换 更换镜像
-RUN if [ ${CONTAINER_PACKAGE_URL} ]; then sed -i "s/dl-cdn.alpinelinux.org/${CONTAINER_PACKAGE_URL}/g" /etc/apk/repositories; fi
+RUN if [ -n "${CONTAINER_PACKAGE_URL}" ]; then sed -i "s/dl-cdn.alpinelinux.org/${CONTAINER_PACKAGE_URL}/g" /etc/apk/repositories; fi
 
 # 修改时间
-RUN if [ ${TZ} ]; then apk add --no-cache --virtual .fetch-deps tzdata && cp -r "/usr/share/zoneinfo/${TZ}" /etc/localtime && echo "${TZ}" > /etc/timezone && apk del .fetch-deps; fi
+RUN if [ -n "${TZ}" ]; then apk add --no-cache --virtual .fetch-deps tzdata && cp -r "/usr/share/zoneinfo/${TZ}" /etc/localtime && echo "${TZ}" > /etc/timezone && apk del .fetch-deps; fi
 
 # 引入 composer
 COPY --from=composer/composer:latest /usr/bin/composer /usr/bin/composer
@@ -36,7 +36,7 @@ RUN chmod +x /usr/local/bin/docker-entrypoint \
 # 更新包索引 安装扩展
 RUN apk update && apk upgrade \
     && docker-php-source extract \
-    && if [ ${PHP_EXTENSIONS} ]; \
+    && if [ -n "${PHP_EXTENSIONS}" ]; \
         then \
             apk add --no-cache --virtual .build-deps autoconf g++ make libtool linux-headers \
             && apk add --no-cache libstdc++ \
@@ -281,13 +281,13 @@ RUN apk update && apk upgrade \
         fi \
     && docker-php-source delete \
     # 替换 composer 镜像 \
-    && if [ ${COMPOSER_IMAGE_URL} ]; then composer config -g repo.packagist composer ${COMPOSER_IMAGE_URL}; fi \
+    && if [ -n "${COMPOSER_IMAGE_URL}" ]; then composer config -g repo.packagist composer ${COMPOSER_IMAGE_URL}; fi \
     && echo "---------- Install supervisor ----------" \
     && apk add --no-cache supervisor \
     # 删除 pecl 下载的扩展包 \
     && rm -rf /tmp/pear \
-    # 删除虚拟包 \
-    && apk del .build-deps \
+    # 删除虚拟包,仅当存在时 \
+    && if apk info -e .build-deps >/dev/null 2>&1; then apk del .build-deps; fi \
     # 删除 apk 下载的包 \
     && rm -rf /var/cache/apk/*
 
