@@ -116,3 +116,5 @@
 
 ## 📝 License
 [Apache-2.0](https://github.com/xiaoyu98628/docker/blob/main/LICENSE)
+
+[![Star History Chart](https://api.star-history.com/svg?repos=xiaoyu98628/docker&type=Date)](https://star-history.com/#xiaoyu98628/docker&Date)
