@@ -4,6 +4,9 @@
 # 排除 .gitignore 文件
 !.gitignore
 
+# 排除 enable-php-74.conf 文件
+!enable-php-74.conf
+
 # 排除 enable-php-82.conf 文件
 !enable-php-82.conf
 
