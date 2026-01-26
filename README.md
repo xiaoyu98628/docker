@@ -70,19 +70,19 @@
    ```
 
 ## 📦 镜像列表
-| 服务名           | 版本                    | 说明                                   |
-|---------------|-----------------------|--------------------------------------|
-| Elasticsearch | 8.4.0 / 9.1.2         | [README.md](elasticsearch/README.md) |
-| Etcd          | 3.5.9                 |                                      |
-| Jenkins       | 2.4.14                |                                      |
-| Kibana        | 8.4.0 / 9.1.2         | [README.md](kibana/README.md)        |
-| MongoDB       | 6.0                   | [README.md](mongo/README.md)         |
-| Mongo-Express | 6.0                   | [README.md](mongo/README.md)         |
-| MySQL         | 8 / 9                 | [README.md](mysql/README.md)         |
-| Nginx         | 1.21 / 1.28           | [README.md](nginx/README.md)         |
-| PHP           | 8.2 / 8.3 / 8.4 / 8.5 | [README.md](php/README.md)           |
-| RabbitMQ      | 3.11                  | [README.md](rabbitmq/README.md)      |
-| Redis         | 6 / 7 / 8             | [README.md](redis/README.md)         |
+| 服务名           | 版本                                                  | 说明                                   |
+|---------------|-----------------------------------------------------|--------------------------------------|
+| Elasticsearch | 8.4.0 / 9.1.2                                       | [README.md](elasticsearch/README.md) |
+| Etcd          | 3.5.9                                               |                                      |
+| Jenkins       | 2.4.14                                              |                                      |
+| Kibana        | 8.4.0 / 9.1.2                                       | [README.md](kibana/README.md)        |
+| MongoDB       | 6.0                                                 | [README.md](mongo/README.md)         |
+| Mongo-Express | 6.0                                                 | [README.md](mongo/README.md)         |
+| MySQL         | 8 / 9                                               | [README.md](mysql/README.md)         |
+| Nginx         | 1.21 / 1.28                                         | [README.md](nginx/README.md)         |
+| PHP           | 7.2 / 7.3 / 7.4 / 8.0 / 8.1 / 8.2 / 8.3 / 8.4 / 8.5 | [README.md](php/README.md)           |
+| RabbitMQ      | 3.11                                                | [README.md](rabbitmq/README.md)      |
+| Redis         | 6 / 7 / 8                                           | [README.md](redis/README.md)         |
 
 ## 🔧 配置说明
 - **sample.env / 各服务目录下的 sample.env**：环境变量模板，请根据需要修改后改名为 .env
