@@ -21,6 +21,108 @@ env:
   COMPOSER_IMAGE_URL: https://mirrors.aliyun.com/composer
 
 jobs:
+  # PHP 7.2
+  build-php-72:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      - name: 准备 compose.yml 文件
+        working-directory: php/7.2
+        run: |
+          cp compose.sample.yml compose.yml
+          # 添加 volumes 和 networks 定义到 compose.yml
+          echo "" >> compose.yml
+          echo "volumes:" >> compose.yml
+          echo "  config_directory:" >> compose.yml
+          echo "    driver: local" >> compose.yml
+          echo "    driver_opts:" >> compose.yml
+          echo "      type: none" >> compose.yml
+          echo "      device: ../../config" >> compose.yml
+          echo "      o: bind" >> compose.yml
+          echo "  project_directory:" >> compose.yml
+          echo "    driver: local" >> compose.yml
+          echo "    driver_opts:" >> compose.yml
+          echo "      type: none" >> compose.yml
+          echo "      device: /tmp/project" >> compose.yml
+          echo "      o: bind" >> compose.yml
+          echo "networks:" >> compose.yml
+          echo "  docker:" >> compose.yml
+          echo "    name: docker" >> compose.yml
+          echo "    driver: bridge" >> compose.yml
+      - name: 设置环境变量
+        working-directory: php/7.2
+        run: |
+          echo "TZ=${{ env.TZ }}" > .env
+          echo "CONTAINER_PACKAGE_URL=${{ env.CONTAINER_PACKAGE_URL }}" >> .env
+          echo "PHP_EXTENSIONS=pdo_mysql,pcntl,mysqli,exif,bcmath,opcache,gettext,gd,sockets,shmop,intl,bz2,soap,zip,sysvmsg,sysvsem,sysvshm,xsl,calendar,tidy,snmp,amqp,apcu,rdkafka,redis,swoole,memcached,xdebug,mongodb,protobuf,grpc,xlswriter,igbinary,imagick,psr,phalcon,mcrypt,yaml" >> .env
+          echo "COMPOSER_IMAGE_URL=${{ env.COMPOSER_IMAGE_URL }}" >> .env
+      - name: 创建必要的目录
+        working-directory: php/7.2
+        run: |
+          mkdir -p /tmp/project
+      - name: 构建 PHP 7.2 镜像
+        working-directory: php/7.2
+        run: docker compose build --no-cache
+      - name: 验证镜像
+        working-directory: php/7.2
+        run: |
+          echo "✅ PHP 7.2 镜像构建成功"
+          docker compose up -d php72
+          docker compose exec php72 php -v
+          docker compose exec php72 php -m
+
+  # PHP 7.3
+  build-php-73:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      - name: 准备 compose.yml 文件
+        working-directory: php/7.3
+        run: |
+          cp compose.sample.yml compose.yml
+          # 添加 volumes 和 networks 定义到 compose.yml
+          echo "" >> compose.yml
+          echo "volumes:" >> compose.yml
+          echo "  config_directory:" >> compose.yml
+          echo "    driver: local" >> compose.yml
+          echo "    driver_opts:" >> compose.yml
+          echo "      type: none" >> compose.yml
+          echo "      device: ../../config" >> compose.yml
+          echo "      o: bind" >> compose.yml
+          echo "  project_directory:" >> compose.yml
+          echo "    driver: local" >> compose.yml
+          echo "    driver_opts:" >> compose.yml
+          echo "      type: none" >> compose.yml
+          echo "      device: /tmp/project" >> compose.yml
+          echo "      o: bind" >> compose.yml
+          echo "networks:" >> compose.yml
+          echo "  docker:" >> compose.yml
+          echo "    name: docker" >> compose.yml
+          echo "    driver: bridge" >> compose.yml
+      - name: 设置环境变量
+        working-directory: php/7.3
+        run: |
+          echo "TZ=${{ env.TZ }}" > .env
+          echo "CONTAINER_PACKAGE_URL=${{ env.CONTAINER_PACKAGE_URL }}" >> .env
+          echo "PHP_EXTENSIONS=pdo_mysql,pcntl,mysqli,exif,bcmath,opcache,gettext,gd,sockets,shmop,intl,bz2,soap,zip,sysvmsg,sysvsem,sysvshm,xsl,calendar,tidy,snmp,amqp,apcu,rdkafka,redis,swoole,memcached,xdebug,mongodb,protobuf,grpc,xlswriter,igbinary,imagick,psr,phalcon,mcrypt,yaml" >> .env
+          echo "COMPOSER_IMAGE_URL=${{ env.COMPOSER_IMAGE_URL }}" >> .env
+      - name: 创建必要的目录
+        working-directory: php/7.3
+        run: |
+          mkdir -p /tmp/project
+      - name: 构建 PHP 7.3 镜像
+        working-directory: php/7.3
+        run: docker compose build --no-cache
+      - name: 验证镜像
+        working-directory: php/7.3
+        run: |
+          echo "✅ PHP 7.3 镜像构建成功"
+          docker compose up -d php73
+          docker compose exec php73 php -v
+          docker compose exec php73 php -m
+
   # PHP 7.4
   build-php-74:
     runs-on: ubuntu-latest
@@ -71,6 +173,108 @@ jobs:
           docker compose up -d php74
           docker compose exec php74 php -v
           docker compose exec php74 php -m
+
+  # PHP 8.0
+  build-php-80:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      - name: 准备 compose.yml 文件
+        working-directory: php/8.0
+        run: |
+          cp compose.sample.yml compose.yml
+          # 添加 volumes 和 networks 定义到 compose.yml
+          echo "" >> compose.yml
+          echo "volumes:" >> compose.yml
+          echo "  config_directory:" >> compose.yml
+          echo "    driver: local" >> compose.yml
+          echo "    driver_opts:" >> compose.yml
+          echo "      type: none" >> compose.yml
+          echo "      device: ../../config" >> compose.yml
+          echo "      o: bind" >> compose.yml
+          echo "  project_directory:" >> compose.yml
+          echo "    driver: local" >> compose.yml
+          echo "    driver_opts:" >> compose.yml
+          echo "      type: none" >> compose.yml
+          echo "      device: /tmp/project" >> compose.yml
+          echo "      o: bind" >> compose.yml
+          echo "networks:" >> compose.yml
+          echo "  docker:" >> compose.yml
+          echo "    name: docker" >> compose.yml
+          echo "    driver: bridge" >> compose.yml
+      - name: 设置环境变量
+        working-directory: php/8.0
+        run: |
+          echo "TZ=${{ env.TZ }}" > .env
+          echo "CONTAINER_PACKAGE_URL=${{ env.CONTAINER_PACKAGE_URL }}" >> .env
+          echo "PHP_EXTENSIONS=pdo_mysql,pcntl,mysqli,exif,bcmath,opcache,gettext,gd,sockets,shmop,intl,bz2,soap,zip,sysvmsg,sysvsem,sysvshm,xsl,calendar,tidy,snmp,amqp,apcu,rdkafka,redis,swoole,memcached,xdebug,mongodb,protobuf,grpc,xlswriter,igbinary,imagick,psr,phalcon,mcrypt,yaml" >> .env
+          echo "COMPOSER_IMAGE_URL=${{ env.COMPOSER_IMAGE_URL }}" >> .env
+      - name: 创建必要的目录
+        working-directory: php/8.0
+        run: |
+          mkdir -p /tmp/project
+      - name: 构建 PHP 8.0 镜像
+        working-directory: php/8.0
+        run: docker compose build --no-cache
+      - name: 验证镜像
+        working-directory: php/8.0
+        run: |
+          echo "✅ PHP 8.0 镜像构建成功"
+          docker compose up -d php80
+          docker compose exec php80 php -v
+          docker compose exec php80 php -m
+
+  # PHP 8.1
+  build-php-81:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      - name: 准备 compose.yml 文件
+        working-directory: php/8.1
+        run: |
+          cp compose.sample.yml compose.yml
+          # 添加 volumes 和 networks 定义到 compose.yml
+          echo "" >> compose.yml
+          echo "volumes:" >> compose.yml
+          echo "  config_directory:" >> compose.yml
+          echo "    driver: local" >> compose.yml
+          echo "    driver_opts:" >> compose.yml
+          echo "      type: none" >> compose.yml
+          echo "      device: ../../config" >> compose.yml
+          echo "      o: bind" >> compose.yml
+          echo "  project_directory:" >> compose.yml
+          echo "    driver: local" >> compose.yml
+          echo "    driver_opts:" >> compose.yml
+          echo "      type: none" >> compose.yml
+          echo "      device: /tmp/project" >> compose.yml
+          echo "      o: bind" >> compose.yml
+          echo "networks:" >> compose.yml
+          echo "  docker:" >> compose.yml
+          echo "    name: docker" >> compose.yml
+          echo "    driver: bridge" >> compose.yml
+      - name: 设置环境变量
+        working-directory: php/8.1
+        run: |
+          echo "TZ=${{ env.TZ }}" > .env
+          echo "CONTAINER_PACKAGE_URL=${{ env.CONTAINER_PACKAGE_URL }}" >> .env
+          echo "PHP_EXTENSIONS=pdo_mysql,pcntl,mysqli,exif,bcmath,opcache,gettext,gd,sockets,shmop,intl,bz2,soap,zip,sysvmsg,sysvsem,sysvshm,xsl,calendar,tidy,snmp,amqp,apcu,rdkafka,redis,swoole,memcached,xdebug,mongodb,protobuf,grpc,xlswriter,igbinary,imagick,psr,phalcon,mcrypt,yaml" >> .env
+          echo "COMPOSER_IMAGE_URL=${{ env.COMPOSER_IMAGE_URL }}" >> .env
+      - name: 创建必要的目录
+        working-directory: php/8.1
+        run: |
+          mkdir -p /tmp/project
+      - name: 构建 PHP 8.1 镜像
+        working-directory: php/8.1
+        run: docker compose build --no-cache
+      - name: 验证镜像
+        working-directory: php/8.1
+        run: |
+          echo "✅ PHP 8.1 镜像构建成功"
+          docker compose up -d php81
+          docker compose exec php81 php -v
+          docker compose exec php81 php -m
 
   # PHP 8.2
   build-php-82:
