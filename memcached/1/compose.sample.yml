@@ -1,0 +1,12 @@
+services:
+  memcached1:
+    image: memcached:1-alpine
+    container_name: memcached1
+    restart: always
+    privileged: true
+    ports:
+      - "11211:11211"
+    environment:
+      - "TZ=${TZ}"
+    networks:
+      - docker
