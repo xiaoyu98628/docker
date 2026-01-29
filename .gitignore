@@ -25,6 +25,10 @@
 !kibana
 !kibana/**
 
+# 排除 memcached 文件
+!memcached
+!memcached/**
+
 # 排除 mongo 文件
 !mongo
 !mongo/**
