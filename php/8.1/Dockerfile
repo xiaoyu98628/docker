@@ -230,7 +230,7 @@ RUN apk update && apk upgrade \
     && if [ -z "${EXTENSIONS##*,protobuf,*}" ]; \
         then \
             echo "---------- Install protobuf ----------" \
-            && printf "\n" | pecl install protobuf \
+            && printf "\n" | pecl install protobuf-4.29.6 \
             && docker-php-ext-enable protobuf; \
         fi \
     && if [ -z "${EXTENSIONS##*,psr,*}" ]; \
