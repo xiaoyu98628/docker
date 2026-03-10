@@ -1,0 +1,20 @@
+services:
+  nginx1.29:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        TZ: ${TZ}
+        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
+    container_name: nginx1.29
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "./config:/etc/nginx"                        # 配置文件
+      - "./logs:/var/log/nginx"                      # 日志文件
+      - "config_directory:/usr/config"               # php unix连接文件
+      - "project_directory:/usr/share/nginx/html"    # 站点文件路径
+    networks:
+      - docker

@@ -1,0 +1,32 @@
+# 忽略当前文件夹下所有文件上传 git
+*
+
+# 排除 .gitignore 文件
+!.gitignore
+
+# 排除 enable-php-72.conf 文件
+!enable-php-72.conf
+
+# 排除 enable-php-73.conf 文件
+!enable-php-73.conf
+
+# 排除 enable-php-74.conf 文件
+!enable-php-74.conf
+
+# 排除 enable-php-80.conf 文件
+!enable-php-80.conf
+
+# 排除 enable-php-81.conf 文件
+!enable-php-81.conf
+
+# 排除 enable-php-82.conf 文件
+!enable-php-82.conf
+
+# 排除 enable-php-83.conf 文件
+!enable-php-83.conf
+
+# 排除 enable-php-84.conf 文件
+!enable-php-84.conf
+
+# 排除 enable-php-85.conf 文件
+!enable-php-85.conf
