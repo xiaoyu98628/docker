@@ -180,7 +180,7 @@ RUN apk update && apk upgrade \
     && if [ -z "${EXTENSIONS##*,swoole,*}" ]; \
         then \
             echo "---------- Install swoole ----------" \
-            && printf "\n" | pecl install swoole \
+            && printf "\n" | pecl install swoole-6.1.7 \
             && docker-php-ext-enable swoole \
             && echo "[swoole]" >> /usr/local/etc/php/conf.d/docker-php-ext-swoole.ini \
             && echo "swoole.enable_fiber_mock = On" >> /usr/local/etc/php/conf.d/docker-php-ext-swoole.ini; \
