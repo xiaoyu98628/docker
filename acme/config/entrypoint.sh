@@ -56,10 +56,10 @@ issue_cert() {
 
   if [ -n "$SERVER" ]; then
     log "INFO: Setting default CA server: $SERVER"
-    "$ACME_SH" --home "$CERT_HOME/account" --set-default-ca --server "$SERVER" >>"$LOG_FILE" 2>&1
+    "$ACME_SH" --config-home "$CERT_HOME/account" --set-default-ca --server "$SERVER" >>"$LOG_FILE" 2>&1
   fi
 
-  set -- --issue --home "$CERT_HOME/account" --keylength "$KEYLENGTH"
+  set -- --issue --config-home "$CERT_HOME/account" --keylength "$KEYLENGTH"
 
   if [ -n "$EMAIL" ]; then
     set -- "$@" --accountemail "$EMAIL"
@@ -92,7 +92,7 @@ issue_cert() {
   esac
 
   log "INFO: Installing certificate to $CERT_DIR"
-  set -- --install-cert --home "$CERT_HOME/account"
+  set -- --install-cert --config-home "$CERT_HOME/account"
 
   OLD_IFS="$IFS"
   IFS=";"
@@ -110,7 +110,7 @@ issue_cert() {
 
 renew_certs() {
   log "INFO: Running certificate renewal"
-  "$ACME_SH" --cron --home "$CERT_HOME/account" >>"$LOG_FILE" 2>&1
+  "$ACME_SH" --cron --config-home "$CERT_HOME/account" >>"$LOG_FILE" 2>&1
 }
 
 issue_cert

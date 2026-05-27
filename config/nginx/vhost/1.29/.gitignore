@@ -6,3 +6,6 @@
 
 # 排除 localhost.conf.sample 文件
 !localhost.conf.sample
+
+# 排除 localhost-ssl.conf.sample 文件
+!localhost.conf.ssl.sample
