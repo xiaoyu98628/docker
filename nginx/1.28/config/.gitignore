@@ -4,14 +4,6 @@
 # 排除 .gitignore 文件
 !.gitignore
 
-# 排除 acme.sh 文件
-!acme.sh
-!acme.sh/**
-
-# 排除 extensions 文件
-!extensions
-!extensions/**
-
 # 排除 php 文件
 !php
 !php/**
