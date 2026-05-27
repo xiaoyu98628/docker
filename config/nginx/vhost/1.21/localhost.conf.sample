@@ -10,6 +10,12 @@ server {
 
     charset utf-8; #防止txt文本出现乱码
 
+    location ^~ /.well-known/acme-challenge/ {
+        root /usr/share/nginx/html;
+        default_type text/plain;
+        try_files $uri =404;
+    }
+
     # 伪静态
     #location / {
     #    if (!-e $request_filename){

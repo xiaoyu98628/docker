@@ -4,6 +4,10 @@
 # 排除 .gitignore 文件
 !.gitignore
 
+# 排除 acme 文件
+!acme
+!acme/**
+
 # 排除 nginx 文件
 !nginx
 !nginx/**

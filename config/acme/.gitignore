@@ -1,0 +1,17 @@
+# 忽略当前文件夹下所有文件上传 git
+*
+
+# 排除 .gitignore 文件
+!.gitignore
+
+# 排除 account 文件
+!account
+!account/**
+
+# 排除 certs 文件
+!certs
+!certs/**
+
+# 排除 domains 文件
+!domains
+!domains/**
