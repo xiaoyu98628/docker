@@ -28,6 +28,12 @@ server {
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;    #安全链接可选的加密协议
     ssl_prefer_server_ciphers on;   #使用服务器端的首选算法
 
+    location ^~ /.well-known/acme-challenge/ {
+        root /usr/share/nginx/html;
+        default_type text/plain;
+        try_files $uri =404;
+    }
+
     location / {
         root   /usr/share/nginx/html/localhost;
         index  index.html;
