@@ -9,7 +9,7 @@
 
 ## 📦 特性 / 支持服务
 
-- 多种服务组合：PHP + Nginx + MySQL + Redis + Elasticsearch + MongoDB + RabbitMQ + …（参见根目录各服务子目录）
+- 多种服务组合：PHP + Nginx + Acme + MySQL + Redis + Elasticsearch + MongoDB + RabbitMQ + …（参见根目录各服务子目录）
 - 支持快速一键构建与启动所有服务
 - 支持按需单独构建 / 单独启动某个服务
 - 统一的 sample 配置模板，包含 `.env` 与 `compose.sample.yml`，方便根据环境变量定制配置
@@ -72,6 +72,7 @@
 ## 📦 镜像列表
 | 服务名           | 版本                                                  | 说明                                   |
 |---------------|-----------------------------------------------------|--------------------------------------|
+| Acme          | acme.sh                                             | [README.md](acme/README.md)          |
 | Elasticsearch | 8.4.0 / 9.1.2                                       | [README.md](elasticsearch/README.md) |
 | Etcd          | 3.5.9                                               |                                      |
 | Jenkins       | 2.4.14                                              |                                      |

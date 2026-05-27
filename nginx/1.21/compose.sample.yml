@@ -6,7 +6,6 @@ services:
       args:
         TZ: ${TZ}
         CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
-        NGINX_REGISTER_ACME_MAIL: ${NGINX_REGISTER_ACME_MAIL}
     container_name: nginx1.21
     restart: always
     ports:
@@ -17,11 +16,5 @@ services:
       - "./logs:/var/log/nginx"                      # 日志文件
       - "config_directory:/usr/config"               # php unix连接文件
       - "project_directory:/usr/share/nginx/html"    # 站点文件路径
-    environment:
-      - "SSL_DOMAINS=${NGINX_SSL_DOMAINS}"
-      - "SSL_SERVER=${NGINX_SSL_SERVER}"
-      - "SSL_DNS=${NGINX_SSL_DNS}"
-      - "SSL_BASE_DIR=${NGINX_SSL_BASE_DIR}"
-      - "RELOAD_CMD=${NGINX_RELOAD_CMD}"
     networks:
       - docker

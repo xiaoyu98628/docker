@@ -1,0 +1,23 @@
+services:
+  acme:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: acme
+    restart: always
+    volumes:
+      - "./logs:/var/log/acme"                       # 日志文件
+      - "config_directory:/usr/config"               # 证书和 acme 账户数据
+      - "project_directory:/usr/share/nginx/html"    # webroot challenge 目录
+    environment:
+      - "ACME_MODE=${ACME_MODE}"
+      - "ACME_DOMAINS=${ACME_DOMAINS}"
+      - "ACME_EMAIL=${ACME_EMAIL}"
+      - "ACME_SERVER=${ACME_SERVER}"
+      - "ACME_DNS=${ACME_DNS}"
+      - "ACME_WEBROOT=${ACME_WEBROOT}"
+      - "ACME_CERT_HOME=${ACME_CERT_HOME}"
+      - "ACME_KEYLENGTH=${ACME_KEYLENGTH}"
+      - "ACME_RENEW_INTERVAL_SECONDS=${ACME_RENEW_INTERVAL_SECONDS}"
+    networks:
+      - docker

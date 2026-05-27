@@ -4,6 +4,5 @@
 # 排除 .gitignore 文件
 !.gitignore
 
-# 排除 acme challenge 目录
-!.well-known
-!.well-known/**
+# 排除 example.com.conf.sample 文件
+!example.com.conf.sample

@@ -1,0 +1,9 @@
+# Example certificate target.
+#
+# The acme service is configured by acme/.env. This file is only a place to
+# document per-domain notes such as DNS provider credentials or target vhost.
+
+domain=example.com
+alt_names=www.example.com
+mode=webroot
+cert_dir=/usr/config/acme/certs/example.com

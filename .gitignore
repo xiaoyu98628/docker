@@ -5,6 +5,10 @@
 !.github
 !.github/**
 
+# 排除 acme 文件
+!acme
+!acme/**
+
 # 排除 config 文件
 !config
 !config/**
