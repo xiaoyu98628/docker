@@ -2,9 +2,7 @@
 FROM rabbitmq:3.11-alpine
 
 # 维护者信息
-LABEL maintainer="XiaoYu <1765841705@qq.com>" \
-    version="8.4" \
-    description="PHP 8.4 FPM with common extensions based on Alpine Linux"
+LABEL org.opencontainers.image.authors="XiaoYu <1765841705@qq.com>"
 
 ARG CONTAINER_PACKAGE_URL
 ARG RABBITMQ_PLUGINS
@@ -119,4 +117,4 @@ RUN apk update && apk upgrade \
     then \
         echo "---------- Install rabbitmq_delayed_message_exchange ----------" \
         && printf "y\n" | rabbitmq-plugins enable rabbitmq_delayed_message_exchange; \
-    fi 
+    fi

@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-SOCKET_PATH="/usr/config/php/sock/php84-fpm.sock"
+SOCKET_PATH="/usr/config/php/sock/php85-fpm.sock"
 
 # 清理 socket
 if [ -S "$SOCKET_PATH" ]; then
