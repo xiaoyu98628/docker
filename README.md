@@ -81,7 +81,7 @@
 | MongoDB       | 6.0                                                 | [README.md](mongo/README.md)         |
 | Mongo-Express | 6.0                                                 | [README.md](mongo/README.md)         |
 | MySQL         | 8 / 9                                               | [README.md](mysql/README.md)         |
-| Nginx         | 1.21 / 1.28 / 1.29                                  | [README.md](nginx/README.md)         |
+| Nginx         | 1.21 / 1.28 / 1.29 / 1.31                           | [README.md](nginx/README.md)         |
 | Node          | 25                                                  |                                      |
 | PHP           | 7.2 / 7.3 / 7.4 / 8.0 / 8.1 / 8.2 / 8.3 / 8.4 / 8.5 | [README.md](php/README.md)           |
 | Postgres      | 18                                                  |                                      |

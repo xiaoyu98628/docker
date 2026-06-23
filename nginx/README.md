@@ -113,7 +113,7 @@ Nginx 镜像只负责读取证书和提供 Web 服务，证书申请与续期由
 4. 修改完成配置文件，重启（重载）即可
    ```shell
    # 方式一：重启 docker compose restart 服务ID
-   docker compose restart nginx1.21
+   docker compose restart nginx1.31
    # 方式二：重载 docker exec 容器ID nginx -s reload
-   docker exec nginx1.21 nginx -s reload
+   docker exec nginx1.31 nginx -s reload
    ```
