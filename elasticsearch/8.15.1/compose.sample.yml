@@ -1,7 +1,7 @@
 services:
-  elasticsearch8-15-1:
+  elasticsearch8.15.1:
     image: elasticsearch:8.15.1
-    container_name: elasticsearch8-15-1
+    container_name: elasticsearch8.15.1
     restart: always
     privileged: true
     ports:
@@ -16,4 +16,6 @@ services:
       - "discovery.type=single-node"      # 单一节点模式启动
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"  # 设置使用jvm内存大小
     networks:
-      - docker
+      docker:
+        aliases:
+          - elasticsearch8-15-1
