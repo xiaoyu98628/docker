@@ -12,6 +12,10 @@
 !logs
 !logs/**
 
+# 排除 scripts 文件
+!scripts
+!scripts/**
+
 # 排除 compose.sample.yml 文件
 !compose.sample.yml
 
