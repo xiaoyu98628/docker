@@ -4,5 +4,5 @@
 # 排除 .gitignore 文件
 !.gitignore
 
-# 排除 entrypoint.sh 文件
-!entrypoint.sh
+# 排除 acme-entrypoint.sh 文件
+!acme-entrypoint.sh

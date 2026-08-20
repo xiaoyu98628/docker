@@ -3,7 +3,7 @@ FROM neilpang/acme.sh:latest
 
 LABEL org.opencontainers.image.authors="XiaoYu <1765841705@qq.com>"
 
-COPY scripts/entrypoint.sh /usr/local/bin/acme-entrypoint
+COPY scripts/acme-entrypoint.sh /usr/local/bin/acme-entrypoint
 
 RUN chmod +x /usr/local/bin/acme-entrypoint
 
