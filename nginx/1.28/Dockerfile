@@ -12,4 +12,8 @@ RUN if [ ${CONTAINER_PACKAGE_URL} ]; then sed -i "s/dl-cdn.alpinelinux.org/${CON
 # 修改时间
 RUN if [ ${TZ} ]; then apk add --no-cache --virtual .time-deps tzdata && cp -r "/usr/share/zoneinfo/${TZ}" /etc/localtime && echo "${TZ}" > /etc/timezone && apk del .time-deps; fi
 
+COPY scripts/40-watch-acme-reload.sh /docker-entrypoint.d/40-watch-acme-reload.sh
+
+RUN chmod +x /docker-entrypoint.d/40-watch-acme-reload.sh
+
 WORKDIR /usr/share/nginx/html
