@@ -105,7 +105,8 @@ issue_cert() {
     --cert-file "$CERT_DIR/cert.pem" \
     --key-file "$CERT_DIR/key.pem" \
     --ca-file "$CERT_DIR/ca.pem" \
-    --fullchain-file "$CERT_DIR/fullchain.pem" >>"$LOG_FILE" 2>&1
+    --fullchain-file "$CERT_DIR/fullchain.pem" \
+    --reloadcmd "touch $CERT_HOME/nginx.reload" >>"$LOG_FILE" 2>&1
 }
 
 renew_certs() {
