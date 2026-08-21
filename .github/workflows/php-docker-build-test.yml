@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 检出代码
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: 准备 compose.yml 文件
         working-directory: php/7.2
         run: |
@@ -77,7 +77,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 检出代码
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: 准备 compose.yml 文件
         working-directory: php/7.3
         run: |
@@ -128,7 +128,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 检出代码
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: 准备 compose.yml 文件
         working-directory: php/7.4
         run: |
@@ -179,7 +179,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 检出代码
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: 准备 compose.yml 文件
         working-directory: php/8.0
         run: |
@@ -230,7 +230,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 检出代码
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: 准备 compose.yml 文件
         working-directory: php/8.1
         run: |
@@ -281,7 +281,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 检出代码
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: 准备 compose.yml 文件
         working-directory: php/8.2
         run: |
@@ -332,7 +332,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 检出代码
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: 准备 compose.yml 文件
         working-directory: php/8.3
         run: |
@@ -383,7 +383,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 检出代码
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: 准备 compose.yml 文件
         working-directory: php/8.4
         run: |
@@ -434,7 +434,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 检出代码
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: 准备 compose.yml 文件
         working-directory: php/8.5
         run: |
