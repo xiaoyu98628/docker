@@ -4,10 +4,6 @@
 # 排除 .gitignore 文件
 !.gitignore
 
-# 排除 ssl 文件
-!ssl
-!ssl/**
-
 # 排除 vhost 文件
 !vhost
 !vhost/**
