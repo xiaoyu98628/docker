@@ -1,9 +1,17 @@
-# Example certificate target.
-#
-# The acme service is configured by acme/.env. This file is only a place to
-# document per-domain notes such as DNS provider credentials or target vhost.
+# 是否启用：true 会申请和续期；false 会停止处理，但不会删除已有证书。
+enabled=true
 
+# 主域名：一份 .conf 文件对应一张独立证书，证书目录也以它命名。
 domain=example.com
+
+# 附加域名：和主域名签入同一张证书，多个域名使用分号分隔，可以留空。
+# 泛域名（例如 *.example.com）必须使用 dns 模式。
 alt_names=www.example.com
+
+# 验证模式：webroot 通过 Nginx 的 HTTP 目录验证；dns 通过 DNS API 验证。
+# 留空时使用 acme/.env 中的 ACME_DEFAULT_MODE。
 mode=webroot
-cert_dir=/usr/config/acme/certs/example.com
+
+# DNS Provider：仅在 mode=dns 时填写，例如 dns_cf、dns_ali。
+# API Token 等敏感凭据必须写在 acme/.env 中，webroot 模式保持为空。
+dns_provider=
