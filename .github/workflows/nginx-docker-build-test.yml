@@ -57,7 +57,6 @@ jobs:
           echo "NGINX_REGISTER_ACME_MAIL=" >> .env
           echo "NGINX_SSL_DOMAINS=" >> .env
           echo "NGINX_SSL_SERVER=letsencrypt" >> .env
-          echo "NGINX_SSL_BASE_DIR=/usr/config/nginx/ssl/1.21" >> .env
           echo "NGINX_SSL_DNS=" >> .env
           echo "NGINX_RELOAD_CMD=nginx -s reload" >> .env
       - name: 创建必要的目录
@@ -112,7 +111,6 @@ jobs:
           echo "NGINX_REGISTER_ACME_MAIL=" >> .env
           echo "NGINX_SSL_DOMAINS=" >> .env
           echo "NGINX_SSL_SERVER=letsencrypt" >> .env
-          echo "NGINX_SSL_BASE_DIR=/usr/config/nginx/ssl/1.28" >> .env
           echo "NGINX_SSL_DNS=" >> .env
           echo "NGINX_RELOAD_CMD=nginx -s reload" >> .env
       - name: 创建必要的目录
