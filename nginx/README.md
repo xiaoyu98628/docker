@@ -63,13 +63,18 @@ PHP收到后，就到指定的目录下查找PHP文件并解析，完成后再�
 ## 5 配置https
 Nginx 镜像只负责读取证书和提供 Web 服务，证书申请与续期由根目录的 `acme` 服务负责。
 
-1. 先使用 `acme` 服务申请证书，证书会安装到：
+1. 先在 `config/acme/domains/*.conf` 中配置证书的主域名：
+   ```ini
+   domain=example.com
+   ```
+   每份域名配置对应一张独立证书，证书目录名使用 `domain` 的值，与 `.conf` 文件名无关。
+   `acme` 服务申请证书后，容器内证书会安装到：
    ```text
-   /usr/config/acme/certs/站点名称/
+   /usr/config/acme/certs/<domain>/
    ```
    宿主机对应：
    ```text
-   ./config/acme/certs/站点名称/
+   ./config/acme/certs/<domain>/
    ```
 2. Webroot 模式需要所有站点都能访问统一 challenge 目录：
    ```nginx
@@ -97,9 +102,9 @@ Nginx 镜像只负责读取证书和提供 Web 服务，证书申请与续期由
       listen  [::]:443 ssl;
       server_name  xxx; # 域名和上面的域名一致
    
-      #ssl证书地址
-      ssl_certificate /usr/config/acme/certs/站点名称/fullchain.pem; # 公钥
-      ssl_certificate_key /usr/config/acme/certs/站点名称/key.pem; # 私钥
+      # ssl 证书地址：example.com 必须与域名配置中的 domain=example.com 一致
+      ssl_certificate /usr/config/acme/certs/example.com/fullchain.pem; # 公钥
+      ssl_certificate_key /usr/config/acme/certs/example.com/key.pem; # 私钥
 
       #ssl验证相关配置
       ssl_session_timeout  5m;    #缓存有效期
@@ -110,10 +115,9 @@ Nginx 镜像只负责读取证书和提供 Web 服务，证书申请与续期由
       ...
    }
    ```
-4. 修改完成配置文件，重启（重载）即可
+4. 修改完成后，先检查 Nginx 配置，然后重载（或重启）服务：
    ```shell
-   # 方式一：重启 docker compose restart 服务ID
-   docker compose restart nginx1.31
-   # 方式二：重载 docker exec 容器ID nginx -s reload
-   docker exec nginx1.31 nginx -s reload
+   docker compose exec nginx1.31 nginx -t
+   docker compose exec nginx1.31 nginx -s reload
    ```
+   其他 Nginx 版本请将服务名替换为对应的 `nginx1.21`、`nginx1.28` 或 `nginx1.29`。

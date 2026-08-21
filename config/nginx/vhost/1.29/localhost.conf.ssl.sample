@@ -29,13 +29,13 @@ server {
     charset utf-8; #防止txt文本出现乱码
 
     # ssl证书地址
-    ssl_certificate     /usr/config/acme/certs/localhost/fullchain.pem; # 公钥
-    ssl_certificate_key /usr/config/acme/certs/localhost/key.pem; # 私钥
+    ssl_certificate     /usr/config/acme/certs/example.com/fullchain.pem; # 公钥，目录名与 ACME 配置中的主域名一致
+    ssl_certificate_key /usr/config/acme/certs/example.com/key.pem; # 私钥，目录名与 ACME 配置中的主域名一致
 
     # ssl验证相关配置
     ssl_session_timeout  5m;    #缓存有效期
     ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;    #加密算法
-    ssl_protocols TLSv1.2 TLSv1.3;;    #安全链接可选的加密协议
+    ssl_protocols TLSv1.2 TLSv1.3;    #安全链接可选的加密协议
     ssl_prefer_server_ciphers on;   #使用服务器端的首选算法
 
     location / {
