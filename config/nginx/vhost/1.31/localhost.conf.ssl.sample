@@ -3,6 +3,16 @@ server {
    listen  [::]:80;
    server_name  localhost; # 域名
 
+    location ^~ /.well-known/acme-challenge/ {
+        root /usr/share/nginx/html;
+        default_type text/plain;
+        try_files $uri =404;
+    }
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+
    # 跳转  实现 http 强转 https
    #rewrite ^(.*)$ https://${server_name}$1 permanent;
 }
@@ -14,8 +24,8 @@ server {
     root   /usr/share/nginx/html/localhost;
     index  index.php index.html index.htm;
 
-    access_log  /var/log/nginx/docker.imcgy.top.log main;
-    error_log  /var/log/nginx/docker.imcgy.top.error.log info;
+    access_log  /var/log/nginx/localhost.access.log main;
+    error_log  /var/log/nginx/localhost.error.log info;
     charset utf-8; #防止txt文本出现乱码
 
     # ssl证书地址
@@ -25,14 +35,8 @@ server {
     # ssl验证相关配置
     ssl_session_timeout  5m;    #缓存有效期
     ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;    #加密算法
-    ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;    #安全链接可选的加密协议
+    ssl_protocols TLSv1.2 TLSv1.3;;    #安全链接可选的加密协议
     ssl_prefer_server_ciphers on;   #使用服务器端的首选算法
-
-    location ^~ /.well-known/acme-challenge/ {
-        root /usr/share/nginx/html;
-        default_type text/plain;
-        try_files $uri =404;
-    }
 
     location / {
         root   /usr/share/nginx/html/localhost;
