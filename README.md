@@ -42,7 +42,11 @@
       - php/8.2/compose.yml
    # ... 其余不变
     ```
-5. 启动服务
+5. 创建共享网络（首次使用时执行一次）
+    ```shell
+    docker network create --driver bridge docker
+    ```
+6. 启动服务
     ```shell
     # 批量启动
     docker compose up -d [镜像名]
@@ -62,11 +66,18 @@
     docker compose logs -f
     docker compose logs -f php82
    
-    # 停止并移除服务
-    docker compose down [镜像名]
+    # 停止指定服务（保留容器）
+    docker compose stop [镜像名]
     # 例如
+    docker compose stop php82
+
+    # 停止并移除指定服务容器（保留共享网络）
+    docker compose rm -sf [镜像名]
+    # 例如
+    docker compose rm -sf php82
+
+    # 停止并移除全部服务（外部共享网络 docker 不会被删除）
     docker compose down
-    docker compose down php82
    ```
 
 ## 📦 镜像列表
@@ -92,6 +103,7 @@
 - **sample.env / 各服务目录下的 sample.env**：环境变量模板，请根据需要修改后改名为 .env
 - **compose.sample.yml / 各服务目录下的 compose.sample.yml**：`docker compose` 模板，改名为 compose.yml 后即可使用
 - 各服务镜像使用独立子目录管理，便于版本控制与组合配置
+- 所有服务共用外部 `docker` 网络；请先用 `docker network create --driver bridge docker` 创建，Compose 不会在 `down` 时删除它
 
 ## 📚 推荐用途
 - 本地开发环境搭建 — 适合同时启动多服务（Web + DB + 缓存/消息队列等）的复杂系统
