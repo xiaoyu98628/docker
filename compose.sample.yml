@@ -22,4 +22,5 @@ volumes:
 networks:
   docker:
     name: docker
+    driver: bridge
     external: true
