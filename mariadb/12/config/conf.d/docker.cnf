@@ -1,0 +1,30 @@
+[mariadb]
+# 与 Compose 数据挂载使用同一个目录
+datadir=/var/lib/mariadb
+
+# 服务端使用的字符集默认为utf8mb4
+character-set-server=utf8mb4
+# 设置collation(排序规则),下面这个是服务器级别的设置方法,还有数据库,表级别的。
+collation-server=utf8mb4_general_ci
+
+# 文件式 binlog；加入复制拓扑时，每台服务器需要不同的 server_id
+server_id=1
+log_bin=/var/log/mariadb/binlog
+binlog_format=ROW
+# 保留 30 天，启动或日志轮转时触发过期清理
+binlog_expire_logs_seconds=2592000
+# 单文件达到约 100 MiB 后轮转，大事务可能超过此值
+max_binlog_size=100M
+# binlog缓存大小
+binlog_cache_size=4M
+# 最大binlog缓存大小
+max_binlog_cache_size=512M
+
+# 启用慢查询日志 on或者1
+slow_query_log=1
+# 慢查询日志文件的路径和名称
+slow_query_log_file=/var/log/mariadb/slow_query.log
+# 慢查询的阈值，单位为秒
+long_query_time=3
+
+log_error=/var/log/mariadb/error.log

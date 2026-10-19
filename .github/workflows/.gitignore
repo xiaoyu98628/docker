@@ -7,6 +7,9 @@
 # 排除 build-php85-test.yml 文件
 !build-php85-test.yml
 
+# 排除 mariadb-docker-build-test.yml 文件
+!mariadb-docker-build-test.yml
+
 # 排除 mysql-docker-build-test.yml 文件
 !mysql-docker-build-test.yml
 

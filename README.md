@@ -88,6 +88,7 @@
 | Etcd          | 3.5.9                                               |                                      |
 | Jenkins       | 2.4.14                                              |                                      |
 | Kibana        | 8.4.0 / 9.1.2                                       | [README.md](kibana/README.md)        |
+| MariaDB       | 12                                                  | [README.md](mariadb/README.md)       |
 | Memcached     | 1                                                   |                                      |
 | MongoDB       | 6.0                                                 | [README.md](mongo/README.md)         |
 | Mongo-Express | 6.0                                                 | [README.md](mongo/README.md)         |

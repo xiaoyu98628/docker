@@ -1,0 +1,109 @@
+name: MariaDB Docker 镜像构建测试
+
+on:
+  push:
+    branches: [ main, master, develop ]
+    paths:
+      - 'mariadb/**'
+      - '.github/workflows/mariadb-docker-build-test.yml'
+  pull_request:
+    branches: [ main, master, develop ]
+    paths:
+      - 'mariadb/**'
+      - '.github/workflows/mariadb-docker-build-test.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 1' # 每周一北京时间 8 点
+
+jobs:
+  build-mariadb-12:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: mariadb/12
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v6
+      - name: 准备本地配置和测试网络
+        run: |
+          set -e
+          cp sample.env .env
+          cp compose.sample.yml compose.yml
+          cat >> compose.yml <<'YAML'
+
+          networks:
+            docker:
+              driver: bridge
+          YAML
+      - name: 构建 MariaDB 12 镜像
+        run: docker compose build --no-cache mariadb12
+      - name: 验证启动、账户、日志及持久化
+        timeout-minutes: 10
+        run: |
+          set -e
+
+          # 仅在 CI 验证时等待 TCP 认证查询成功。
+          wait_for_mariadb() {
+            for attempt in $(seq 1 60); do
+              if docker compose exec -T mariadb12 sh -c 'MYSQL_PWD="$MARIADB_PASSWORD" mariadb --protocol=TCP --host=127.0.0.1 --user="$MARIADB_USER" --connect-timeout=2 --batch --execute="SELECT 1;"' > /dev/null 2>&1; then
+                return 0
+              fi
+              sleep 2
+            done
+            echo "Error: MariaDB 未在重试次数内通过 TCP 连接验证" >&2
+            return 1
+          }
+
+          docker compose up -d mariadb12
+          wait_for_mariadb
+          docker compose exec -T mariadb12 sh -ec '
+            export MYSQL_PWD="$MARIADB_PASSWORD"
+            mariadb --protocol=TCP --host=127.0.0.1 --user="$MARIADB_USER" --connect-timeout=5 --batch --execute="
+              SELECT VERSION() AS version;
+              SELECT 1 AS ready;
+              CREATE DATABASE mariadb_ci_check;
+              CREATE TABLE mariadb_ci_check.persistence (id INT PRIMARY KEY, value VARCHAR(32));
+              INSERT INTO mariadb_ci_check.persistence VALUES (1, '\''ready'\'');
+            "
+            binlog_valid="$(mariadb --protocol=TCP --host=127.0.0.1 --user="$MARIADB_USER" --connect-timeout=5 --batch --skip-column-names --execute="SELECT IF(@@global.log_bin=1 AND @@global.binlog_format='\''ROW'\'' AND @@global.binlog_expire_logs_seconds=2592000, 1, 0);")"
+            if [ "$binlog_valid" != "1" ]; then
+              echo "Error: MariaDB binlog 配置与预期不符" >&2
+              exit 1
+            fi
+            actual_datadir="$(mariadb --protocol=TCP --host=127.0.0.1 --user="$MARIADB_USER" --connect-timeout=5 --batch --skip-column-names --execute="SELECT @@global.datadir;")"
+            if [ "${actual_datadir%/}" != "/var/lib/mariadb" ]; then
+              echo "Error: MariaDB 数据目录与挂载目录不一致" >&2
+              exit 1
+            fi
+          '
+          docker compose exec -T mariadb12 sh -ec '
+            for log_file in binlog.index error.log slow_query.log; do
+              if [ ! -f "/var/log/mariadb/$log_file" ]; then
+                echo "Error: MariaDB 日志文件未生成：$log_file" >&2
+                exit 1
+              fi
+            done
+          '
+          # 更新匿名卷，确保数据来自宿主机绑定目录。
+          docker compose up -d --force-recreate --renew-anon-volumes mariadb12
+          wait_for_mariadb
+          docker compose exec -T mariadb12 sh -ec '
+            export MYSQL_PWD="$MARIADB_PASSWORD"
+            saved_value="$(mariadb --protocol=TCP --host=127.0.0.1 --user="$MARIADB_USER" --connect-timeout=5 --batch --skip-column-names --execute="SELECT value FROM mariadb_ci_check.persistence WHERE id=1;")"
+            if [ "$saved_value" != "ready" ]; then
+              echo "Error: MariaDB 重建容器后未读到预期数据" >&2
+              exit 1
+            fi
+            mariadb --protocol=TCP --host=127.0.0.1 --user="$MARIADB_USER" --connect-timeout=5 --execute="DROP DATABASE mariadb_ci_check;"
+          '
+      - name: 失败时输出日志
+        if: failure()
+        run: |
+          docker compose logs --no-color mariadb12 || true
+          if [ -f logs/error.log ]; then
+            sudo tail -n 100 logs/error.log
+          fi
+      - name: 清理测试容器和网络
+        if: always()
+        run: docker compose down --volumes

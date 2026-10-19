@@ -29,6 +29,10 @@
 !kibana
 !kibana/**
 
+# 排除 mariadb 文件
+!mariadb
+!mariadb/**
+
 # 排除 memcached 文件
 !memcached
 !memcached/**
