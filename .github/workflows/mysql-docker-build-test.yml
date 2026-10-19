@@ -122,8 +122,22 @@ jobs:
         run: docker compose build --no-cache
       - name: 验证镜像
         working-directory: mysql/26
+        timeout-minutes: 5
         run: |
-          echo "✅ MySQL 26 镜像构建成功"
+          set -e
           docker compose up -d mysql26
-          sleep 20
-          docker compose exec mysql26 mysql --version
+
+          # 临时初始化服务不开放 TCP，使用初始化用户登录成功后才表示数据库真正就绪。
+          for attempt in $(seq 1 60); do
+            if docker compose exec -T mysql26 sh -c 'MYSQL_PWD="$MYSQL_PASSWORD" mysql --protocol=TCP --host=127.0.0.1 --user="$MYSQL_USER" --connect-timeout=2 --batch --execute="SELECT VERSION() AS version; SELECT 1 AS ready;"'; then
+              echo "✅ MySQL 26 镜像构建及数据库连接验证成功"
+              exit 0
+            fi
+            echo "等待 MySQL 26 就绪（${attempt}/60）"
+            sleep 2
+          done
+
+          echo "Error: MySQL 26 未在重试次数内通过数据库连接验证" >&2
+          docker compose logs --no-color mysql26 || true
+          docker compose exec -T mysql26 sh -c 'if [ -f /var/log/mysql/error.err ]; then tail -n 100 /var/log/mysql/error.err; fi' || true
+          exit 1
