@@ -1,0 +1,3 @@
+GRANT ALL ON *.* TO '${MYSQL_USER}'@'%';
+-- 刷新权限
+FLUSH PRIVILEGES;

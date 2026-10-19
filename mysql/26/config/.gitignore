@@ -1,0 +1,12 @@
+# 忽略当前文件夹下所有文件上传 git
+*
+
+# 排除 .gitignore 文件
+!.gitignore
+
+# 排除 conf.d 文件
+!conf.d
+!conf.d/**
+
+# 排除 my.cnf 文件
+!my.cnf

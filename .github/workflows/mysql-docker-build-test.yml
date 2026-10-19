@@ -92,3 +92,52 @@ jobs:
           docker compose up -d mysql9
           sleep 20
           docker compose exec mysql9 mysql --version
+
+  # MySQL 26
+  build-mysql-26:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v6
+      - name: 准备 compose.yml 文件
+        working-directory: mysql/26
+        run: |
+          cp compose.sample.yml compose.yml
+          # 添加 networks 定义到 compose.yml
+          echo "" >> compose.yml
+          echo "networks:" >> compose.yml
+          echo "  docker:" >> compose.yml
+          echo "    name: docker" >> compose.yml
+          echo "    driver: bridge" >> compose.yml
+      - name: 设置环境变量
+        working-directory: mysql/26
+        run: |
+          echo "TZ=${{ env.TZ }}" > .env
+          echo "MYSQL_ROOT_PASSWORD=${{ env.MYSQL_ROOT_PASSWORD }}" >> .env
+          echo "MYSQL_ROOT_HOST=${{ env.MYSQL_ROOT_HOST }}" >> .env
+          echo "MYSQL_USER=${{ env.MYSQL_USER }}" >> .env
+          echo "MYSQL_PASSWORD=${{ env.MYSQL_PASSWORD }}" >> .env
+      - name: 构建 MySQL 26 镜像
+        working-directory: mysql/26
+        run: docker compose build --no-cache
+      - name: 验证镜像
+        working-directory: mysql/26
+        timeout-minutes: 5
+        run: |
+          set -e
+          docker compose up -d mysql26
+
+          # 临时初始化服务不开放 TCP，使用初始化用户登录成功后才表示数据库真正就绪。
+          for attempt in $(seq 1 60); do
+            if docker compose exec -T mysql26 sh -c 'MYSQL_PWD="$MYSQL_PASSWORD" mysql --protocol=TCP --host=127.0.0.1 --user="$MYSQL_USER" --connect-timeout=2 --batch --execute="SELECT VERSION() AS version; SELECT 1 AS ready;"'; then
+              echo "✅ MySQL 26 镜像构建及数据库连接验证成功"
+              exit 0
+            fi
+            echo "等待 MySQL 26 就绪（${attempt}/60）"
+            sleep 2
+          done
+
+          echo "Error: MySQL 26 未在重试次数内通过数据库连接验证" >&2
+          docker compose logs --no-color mysql26 || true
+          docker compose exec -T mysql26 sh -c 'if [ -f /var/log/mysql/error.err ]; then tail -n 100 /var/log/mysql/error.err; fi' || true
+          exit 1

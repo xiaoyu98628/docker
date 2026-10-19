@@ -5,6 +5,7 @@
 ```shell
 chmod -R 777 ./8/logs
 chmod -R 777 ./9/logs
+chmod -R 777 ./26/logs
 ```
 重启即可
 
@@ -45,3 +46,4 @@ FLUSH PRIVILEGES;
 1、配置文件权限问题：成功创建容器进入容器修改配置文件权限及用户和用户组 `chown -R mysql:mysql /etc/mysql`, `chown -R 755 /etc/mysql`， 重启 mysql 容器  
 2、连接问题：原因是因为 在 MySQL 8.0 及更高版本中，默认的认证插件从 mysql_native_password 更改为 caching_sha2_password。如果你的 MySQL 服务器不再使用 mysql_native_password 插件，php7.3 及低版本中可能会因为不支持 caching_sha2_password 而无法连接数据库。  
 解决办法：修改密码；例如`ALTER USER 'admin'@'%' IDENTIFIED WITH mysql_native_password BY 'admin';`
+> 注意: mysql_native_password 服务端插件从 9.0 起已移除。[官方说明](https://dev.mysql.com/doc/mysql-security-excerpt/8.0/en/native-pluggable-authentication.html)
