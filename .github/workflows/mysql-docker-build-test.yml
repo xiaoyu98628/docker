@@ -92,3 +92,38 @@ jobs:
           docker compose up -d mysql9
           sleep 20
           docker compose exec mysql9 mysql --version
+
+  # MySQL 26
+  build-mysql-26:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v6
+      - name: 准备 compose.yml 文件
+        working-directory: mysql/26
+        run: |
+          cp compose.sample.yml compose.yml
+          # 添加 networks 定义到 compose.yml
+          echo "" >> compose.yml
+          echo "networks:" >> compose.yml
+          echo "  docker:" >> compose.yml
+          echo "    name: docker" >> compose.yml
+          echo "    driver: bridge" >> compose.yml
+      - name: 设置环境变量
+        working-directory: mysql/26
+        run: |
+          echo "TZ=${{ env.TZ }}" > .env
+          echo "MYSQL_ROOT_PASSWORD=${{ env.MYSQL_ROOT_PASSWORD }}" >> .env
+          echo "MYSQL_ROOT_HOST=${{ env.MYSQL_ROOT_HOST }}" >> .env
+          echo "MYSQL_USER=${{ env.MYSQL_USER }}" >> .env
+          echo "MYSQL_PASSWORD=${{ env.MYSQL_PASSWORD }}" >> .env
+      - name: 构建 MySQL 26 镜像
+        working-directory: mysql/26
+        run: docker compose build --no-cache
+      - name: 验证镜像
+        working-directory: mysql/26
+        run: |
+          echo "✅ MySQL 26 镜像构建成功"
+          docker compose up -d mysql26
+          sleep 20
+          docker compose exec mysql26 mysql --version
