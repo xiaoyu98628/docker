@@ -1,0 +1,24 @@
+services:
+  mariadb12:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        TZ: ${TZ}
+    container_name: mariadb12
+    restart: always
+    ports:
+      - "${MARIADB_PORT}:3306"
+    volumes:
+      - "./config/conf.d:/etc/mysql/conf.d:rw" # 自定义配置，保留镜像内的默认主配置
+      - "./init:/docker-entrypoint-initdb.d:rw" # 首次初始化时执行
+      - "./data:/var/lib/mariadb:rw" # 数据库文件
+      - "./logs:/var/log/mariadb:rw" # 日志文件
+    environment:
+      TZ: ${TZ}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_ROOT_HOST: ${MARIADB_ROOT_HOST}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+    networks:
+      - docker

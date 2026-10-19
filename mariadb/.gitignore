@@ -1,0 +1,12 @@
+# 忽略当前文件夹下所有文件上传 git
+*
+
+# 排除 .gitignore 文件
+!.gitignore
+
+# 排除 12 文件
+!12
+!12/**
+
+# 排除 README.md 文件
+!README.md
