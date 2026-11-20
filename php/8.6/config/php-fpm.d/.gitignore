@@ -1,0 +1,17 @@
+# 忽略当前文件夹下所有文件上传 git
+*
+
+# 排除 .gitignore 文件
+!.gitignore
+
+# 排除 docker.conf 文件
+!docker.conf
+
+# 排除 www.conf 文件
+!www.conf
+
+# 排除 www.conf.default 文件
+!www.conf.default
+
+# 排除 zz-docker.conf 文件
+!zz-docker.conf
