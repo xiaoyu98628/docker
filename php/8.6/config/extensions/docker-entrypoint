@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+SOCKET_PATH="/usr/config/php/sock/php86-fpm.sock"
+
+# 清理 socket
+if [ -S "$SOCKET_PATH" ]; then
+    echo "🧹 清理残留 socket 文件: $SOCKET_PATH"
+    rm -f "$SOCKET_PATH"
+fi
+
+# 执行传入的命令
+exec "$@"

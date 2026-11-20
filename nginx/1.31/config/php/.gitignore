@@ -30,3 +30,7 @@
 
 # 排除 enable-php-85.conf 文件
 !enable-php-85.conf
+
+# 排除 enable-php-86.conf 文件
+!enable-php-86.conf
+
